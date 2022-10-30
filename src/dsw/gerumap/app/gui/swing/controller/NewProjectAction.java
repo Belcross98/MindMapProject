@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
-public class NewProjectAction extends AbstractRudokAction{
+public class NewProjectAction extends AbstractGerumapAction {
 
     public NewProjectAction(){
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
