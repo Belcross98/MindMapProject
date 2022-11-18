@@ -1,14 +1,16 @@
-package dsw.gerumap.app.gui.swing.workspace.view;
+package dsw.gerumap.app.gui.swing.workspace;
 
 import dsw.gerumap.app.maprepository.composite.MapNode;
 import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.implementation.Project;
+import dsw.gerumap.app.maprepository.observer.ISubscriber;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectView extends JPanel {
+public class ProjectView extends JPanel implements ISubscriber {
 
     private String projectName;
     private String authorName;
@@ -30,30 +32,67 @@ public class ProjectView extends JPanel {
        add(projectName1);
        add(authorName1);
        add(tabbedPane);
+       setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+       authorName1.setVisible(true);
+       projectName1.setVisible(true);
+
+       authorName1.setText("Autor");
+       projectName1.setText("Projekat");
+
+       authorName1.setMinimumSize(new Dimension(150,20));
+       projectName1.setMinimumSize(new Dimension(150,20));
+
    }
 
 
     public void refreshWorkspace(MapNode selectedProject){
-        //uklanjamo stare tabove
+
         tabs.clear();
         tabbedPane.removeAll();
 
-        //dodajemo poljima vrednosti iz projekta
+        if(project != null){
+            ((Project)project).removeSubscriber(this);
+        }
+
+
         this.project = selectedProject;
-        authorName = ((Project)selectedProject).getAuthor();
-        projectName = ((Project)selectedProject).getName();
+
+        ((Project)project).addSubscriber(this);
 
 
-        //prolazimo kroz decu selektovanog projekta i pravimo wraper klasu - MapView
-
-        //zatim taj MapView tab dodajemo u listu tabova -> for each petlja
         for(MapNode child: ((Project) selectedProject).getListOfChildren()) {
             MapView tab = new MapView((MindMap) child);
             tabs.add(tab);
         }
-        //prolazimo kroz listu "tabovi" i svaki tab dodajemo na tabbedPane
+
         for(MapView tab : tabs)
           tabbedPane.addTab(tab.getMindMap().getName(), tab);
 
+        refreshLabele();
+
     }
+
+        @Override
+        public void update(Object notification) {
+            if(project == null){
+                return;
+            }
+            refreshLabele();
+
+
+        }
+
+        private void refreshLabele(){
+
+            authorName = ((Project)project).getAuthor();
+            projectName = ((Project)project).getName();
+
+            projectName1.setText(projectName);
+            authorName1.setText(authorName);
+
+
+        }
+
 }
+

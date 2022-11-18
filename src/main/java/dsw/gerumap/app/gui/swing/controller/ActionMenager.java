@@ -16,6 +16,8 @@ public class ActionMenager {
 
     private  RemoveAction removeAction;
 
+    private AddAuthorAction addAuthorAction;
+
     public ActionMenager(){
         initialiseActions();
     }
@@ -25,6 +27,7 @@ public class ActionMenager {
         newProjectAction = new NewProjectAction();
         infoAction = new InfoAction();
         removeAction = new RemoveAction();
+        addAuthorAction = new AddAuthorAction();
     }
 
 

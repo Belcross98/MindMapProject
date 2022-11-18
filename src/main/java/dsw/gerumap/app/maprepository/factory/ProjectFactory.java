@@ -5,7 +5,7 @@ import dsw.gerumap.app.maprepository.implementation.Project;
 
 public class ProjectFactory implements NodeFactory{
     @Override
-    public MapNode getNode() {
-        return new Project();
+    public MapNode getNode(String name) {
+        return new Project(name, null);
     }
 }

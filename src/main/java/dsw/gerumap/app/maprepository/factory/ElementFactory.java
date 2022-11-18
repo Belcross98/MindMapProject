@@ -8,8 +8,8 @@ public class ElementFactory implements NodeFactory {
 
 
     @Override
-    public MapNode getNode() {
-        return new Element();
+    public MapNode getNode(String name) {
+        return new Element(name, null);
     }
 
 

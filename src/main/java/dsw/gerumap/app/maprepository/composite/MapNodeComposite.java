@@ -37,6 +37,8 @@ public abstract class MapNodeComposite extends MapNode{
         return null;
     }
 
+    public abstract String getChildrenClassName();
+
     public abstract void removeChild(MapNode child);
 
 

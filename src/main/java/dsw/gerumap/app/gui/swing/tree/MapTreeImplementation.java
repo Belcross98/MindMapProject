@@ -6,10 +6,7 @@ import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.tree.view.MapTreeView;
 import dsw.gerumap.app.maprepository.composite.MapNode;
 import dsw.gerumap.app.maprepository.composite.MapNodeComposite;
-import dsw.gerumap.app.maprepository.factory.ElementFactory;
-import dsw.gerumap.app.maprepository.factory.MindMapFactory;
-import dsw.gerumap.app.maprepository.factory.NodeFactory;
-import dsw.gerumap.app.maprepository.factory.ProjectFactory;
+import dsw.gerumap.app.maprepository.factory.*;
 import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.implementation.Project;
 import dsw.gerumap.app.maprepository.implementation.ProjectExplorer;
@@ -53,21 +50,27 @@ public class MapTreeImplementation implements MapTree{
     }
 
 
-    private MapNode createChild(MapNode parent){
+    private MapNode createChild(MapNodeComposite parent){
+
+        NodeFactory nodeFactory = new FactoryUtils().getNodeFactory(parent);
+        return nodeFactory.getNode(parent.getChildrenClassName() + " " + (parent.getListOfChildren().size() + 1));
+
+        /* Pogresna imlementacija factory-ja
+
         NodeFactory elementFactory = new ElementFactory();
         NodeFactory mindMapFactory = new MindMapFactory();
         NodeFactory projectFactory = new ProjectFactory();
 
         if(parent instanceof ProjectExplorer){
             MapNode project = projectFactory.getNode();
-            project.setName("Project" + new Random().nextInt(100));
+            project.setName("Project" + (((ProjectExplorer) parent).getListOfChildren().size() + 1));
             project.setParent(parent);
             return  project;
            //return new Project ("Project" + new Random().nextInt(100),parent);
         }
         if(parent instanceof  Project){
             MapNode mindMap  = mindMapFactory.getNode();
-            mindMap.setName("MindMap" + new Random().nextInt(100));
+            mindMap.setName("MindMap" + (((Project) parent).getListOfChildren().size() + 1));
             mindMap.setParent(parent);
             return  mindMap;
          //  return new MindMap("MindMap" +new Random().nextInt(100));
@@ -75,13 +78,14 @@ public class MapTreeImplementation implements MapTree{
         if(parent instanceof  MindMap){
 
             MapNode element = elementFactory.getNode();
-            element.setName("Element" + new Random().nextInt(100));
+            element.setName("Element" + (((MindMap) parent).getListOfChildren().size() + 1));
             element.setParent(parent);
             return  element;
           // return new Element("Element" +new Random().nextInt(100), parent);
         }
 
         return null;
+        */
 
     }
     @Override
@@ -91,10 +95,11 @@ public class MapTreeImplementation implements MapTree{
             return;
 
 
-        MapNode child = createChild(parent.getMapNode());
+        MapNode child = createChild((MapNodeComposite)parent.getMapNode());
         parent.add(new MapTreeItem(child));
         ((MapNodeComposite) parent.getMapNode()).addChild(child);
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
+        System.out.println(((MapNodeComposite) parent.getMapNode()).getListOfChildren());
     }
 }

@@ -14,6 +14,10 @@ public class ProjectExplorer extends MapNodeComposite {
     public ProjectExplorer(String name) {
         super(name, null);
     }
+
+    public ProjectExplorer(){
+
+    }
     @Override
     public void addChild(MapNode child) {
         if (child != null && child instanceof Project) {
@@ -22,6 +26,11 @@ public class ProjectExplorer extends MapNodeComposite {
                 this.getListOfChildren().add(project);
             }
         }
+    }
+
+    @Override
+    public String getChildrenClassName() {
+        return "Project";
     }
 
     @Override

@@ -3,10 +3,9 @@ package dsw.gerumap.app.gui.swing.view;
 import dsw.gerumap.app.core.ApplicationFramework;
 import dsw.gerumap.app.gui.swing.controller.ActionMenager;
 import dsw.gerumap.app.gui.swing.tree.view.MapTreeView;
-import dsw.gerumap.app.gui.swing.workspace.Workspace;
-import dsw.gerumap.app.gui.swing.workspace.WorkspaceImplementation;
 import dsw.gerumap.app.gui.swing.tree.MapTree;
 import dsw.gerumap.app.gui.swing.tree.MapTreeImplementation;
+import dsw.gerumap.app.gui.swing.workspace.ProjectView;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +29,7 @@ public class MainFrame extends JFrame {
 
     private MapTreeView projectExplorer;
 
-    private Workspace workspace;
+    private ProjectView projectView;
 
     private MainFrame(){
 
@@ -39,7 +38,7 @@ public class MainFrame extends JFrame {
     private void initialise(){
         actionMenager = new ActionMenager();
         mapTree = new MapTreeImplementation();
-        workspace = new WorkspaceImplementation();
+        projectView = new ProjectView();
         initialiseGUI();
 
     }
@@ -64,8 +63,8 @@ public class MainFrame extends JFrame {
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
-        JPanel rightPanel = workspace.generateWorkspace();
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,rightPanel);
+        JPanel rightPanel = projectView;
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll, rightPanel);
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);

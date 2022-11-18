@@ -21,4 +21,8 @@ public class Message {
         this.dateAndTime = dateAndTime;
     }
 
+    public String toString(){
+        return "[" + type + "] +" + "[" + dateAndTime + "]" + " " + text;
+    }
+
 }

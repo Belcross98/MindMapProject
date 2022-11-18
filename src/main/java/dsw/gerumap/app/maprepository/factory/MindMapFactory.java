@@ -7,7 +7,7 @@ public class MindMapFactory implements NodeFactory{
 
 
     @Override
-    public MapNode getNode() {
-        return new MindMap();
+    public MapNode getNode(String name) {
+        return new MindMap(name);
     }
 }
