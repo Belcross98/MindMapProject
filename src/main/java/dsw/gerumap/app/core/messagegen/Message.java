@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 public class Message {
 
     private String text;
-    private EventType type;
+    private MessageType type;
 
     private LocalDateTime dateAndTime;
 
-    public Message(String text, EventType type,  LocalDateTime dateAndTime ) {
+    public Message(String text, MessageType type,  LocalDateTime dateAndTime ) {
         this.text = text;
         this.type = type;
         this.dateAndTime = dateAndTime;

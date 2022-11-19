@@ -38,10 +38,14 @@ public class Project extends MapNodeComposite implements IPublisher {
     }
     @Override
     public void addChild(MapNode child) {
+        System.out.println("1");
         if (child != null &&  child instanceof MindMap){
             MindMap mindMap = (MindMap) child;
+            System.out.println("2");
             if(!this.getListOfChildren().contains(mindMap)){
+                System.out.println("3");
                 this.getListOfChildren().add(mindMap);
+                System.out.println("4");
             }
             }
     }

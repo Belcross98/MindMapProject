@@ -1,5 +1,7 @@
 package dsw.gerumap.app.gui.swing.controller;
 
+import dsw.gerumap.app.AppCore;
+import dsw.gerumap.app.core.messagegen.EventType;
 import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 
@@ -20,8 +22,10 @@ public class RemoveAction extends AbstractGerumapAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
-        if(selected == null)
+        if(selected == null) {
+                AppCore.getInstance().getMessageGenerator().messageGenerate(EventType.NODE_NOT_SELECTED);
             return;
+        }
         MainFrame.getInstance().getMapTree().removeChild(selected);
     }
 }

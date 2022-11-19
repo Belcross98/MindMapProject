@@ -1,6 +1,10 @@
 package dsw.gerumap.app.core;
 
-public interface ErrorLogger {
+import dsw.gerumap.app.maprepository.observer.ISubscriber;
+
+public interface ErrorLogger extends ISubscriber {
 
    void  log();
+
+   void initialise(MessageGenerator messageGenerator);
 }

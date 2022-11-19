@@ -1,11 +1,15 @@
 package dsw.gerumap.app.gui.swing.view;
 
 import dsw.gerumap.app.core.ApplicationFramework;
+import dsw.gerumap.app.core.MessageGenerator;
+import dsw.gerumap.app.core.messagegen.Message;
+import dsw.gerumap.app.core.messagegen.MessageType;
 import dsw.gerumap.app.gui.swing.controller.ActionMenager;
 import dsw.gerumap.app.gui.swing.tree.view.MapTreeView;
 import dsw.gerumap.app.gui.swing.tree.MapTree;
 import dsw.gerumap.app.gui.swing.tree.MapTreeImplementation;
 import dsw.gerumap.app.gui.swing.workspace.ProjectView;
+import dsw.gerumap.app.maprepository.observer.ISubscriber;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +19,7 @@ import java.awt.*;
 @Getter
 @Setter
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
 
     private static MainFrame instance;
 
@@ -30,6 +34,8 @@ public class MainFrame extends JFrame {
     private MapTreeView projectExplorer;
 
     private ProjectView projectView;
+
+    private MessageGenerator messageGenerator;
 
     private MainFrame(){
 
@@ -82,6 +88,18 @@ public class MainFrame extends JFrame {
 
     public ActionMenager getActionMenager(){
         return actionMenager;
+    }
+
+    public void setMessageGenerator(MessageGenerator messageGenerator) {
+        this.messageGenerator = messageGenerator;
+        messageGenerator.addSubscriber(this);
+    }
+
+    @Override
+    public void update(Object notification) {
+        Message message = (Message)notification;
+        JOptionPane.showMessageDialog(this,message.toString(),message.getType().toString(), JOptionPane.ERROR_MESSAGE);
+
     }
 
 

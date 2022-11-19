@@ -1,5 +1,6 @@
 package dsw.gerumap.app.errorlogger;
 
+import dsw.gerumap.app.core.MessageGenerator;
 import dsw.gerumap.app.core.messagegen.Message;
 import dsw.gerumap.app.maprepository.observer.ISubscriber;
 import dsw.gerumap.app.core.ErrorLogger;
@@ -16,7 +17,7 @@ public class FileLogger implements ErrorLogger, ISubscriber {
     @Override
     public void log() {
         try {
-            file = new File("log.txt");
+            file = new File("src/main/resources/logs.txt");
             FileWriter fw = new FileWriter(file);
             fw.write(message.toString());
             fw.close();
@@ -28,9 +29,17 @@ public class FileLogger implements ErrorLogger, ISubscriber {
 
     }
 
+    @Override
+    public void initialise(MessageGenerator messageGenerator) {
+        messageGenerator.addSubscriber(this);
+    }
+
+
+
 
     @Override
     public void update(Object notification) {
+        message = (Message) notification;
         log();
     }
 }

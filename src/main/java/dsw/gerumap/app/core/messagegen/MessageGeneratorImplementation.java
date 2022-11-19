@@ -17,12 +17,23 @@ public class MessageGeneratorImplementation implements MessageGenerator, IPublis
     @Override
     public Message messageGenerate(EventType type) {
 
-        Message msg;
+        Message msg = null;
         if (type == EventType.TRY_TO_DELETE_PROJECTEXPLORER) {
-            msg = new Message("", type, LocalDateTime.now());
+            msg = new Message("You can not delete project explorer!", MessageType.ERROR, LocalDateTime.now());
         }
 
-        return null;
+        if(type == EventType.MUST_HAVE_NAME){
+            msg = new Message("You need to enter name!", MessageType.WARNING, LocalDateTime.now());
+        }
+        if(type == EventType.NODE_NOT_SELECTED){
+            msg = new Message("Nothing is selected!", MessageType.WARNING, LocalDateTime.now());
+        }
+
+        if (type == EventType.NODE_CANNOT_HAVE_CHILDREN) {
+            msg = new Message("You can not add node!", MessageType.ERROR, LocalDateTime.now());
+        }
+        notifySubscribers(msg);
+        return msg;
     }
 
 

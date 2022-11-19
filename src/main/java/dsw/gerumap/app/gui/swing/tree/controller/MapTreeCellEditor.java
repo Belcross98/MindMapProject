@@ -1,5 +1,8 @@
 package dsw.gerumap.app.gui.swing.tree.controller;
 
+import dsw.gerumap.app.AppCore;
+import dsw.gerumap.app.core.messagegen.EventType;
+import dsw.gerumap.app.gui.swing.SwingGui;
 import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 
 import javax.swing.*;
@@ -45,7 +48,12 @@ public class MapTreeCellEditor extends DefaultTreeCellEditor {
             return;
 
         MapTreeItem clicked = (MapTreeItem) clickedOn;
-        clicked.setName(e.getActionCommand());
+        if(e.getActionCommand().isEmpty()){
+            AppCore.getInstance().getMessageGenerator().messageGenerate(EventType.MUST_HAVE_NAME);
+        }else{
+            clicked.setName(e.getActionCommand());
+        }
+
 
     }
 

@@ -1,7 +1,9 @@
 package dsw.gerumap.app.gui.swing.tree;
 
+import dsw.gerumap.app.AppCore;
 import dsw.gerumap.app.core.ApplicationFramework;
 import dsw.gerumap.app.core.MapRepository;
+import dsw.gerumap.app.core.messagegen.EventType;
 import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.tree.view.MapTreeView;
 import dsw.gerumap.app.maprepository.composite.MapNode;
@@ -43,7 +45,15 @@ public class MapTreeImplementation implements MapTree{
 
     @Override
     public void removeChild(MapTreeItem child) {
+        System.out.println(child);
+        System.out.println(child.getMapNode());
         MapNodeComposite parent = (MapNodeComposite) child.getMapNode().getParent();
+        System.out.println(parent);
+        if(child.getMapNode() instanceof ProjectExplorer) {
+            AppCore.getInstance().getMessageGenerator().messageGenerate(EventType.TRY_TO_DELETE_PROJECTEXPLORER);
+            return;
+        }
+
         parent.removeChild(child.getMapNode());
         treeModel.removeNodeFromParent(child);
         SwingUtilities.updateComponentTreeUI(treeView);
@@ -91,13 +101,18 @@ public class MapTreeImplementation implements MapTree{
     @Override
     public void addChild(MapTreeItem parent) {
 
-        if(!(parent.getMapNode() instanceof MapNodeComposite))
+        if(!(parent.getMapNode() instanceof MapNodeComposite)) {
+            AppCore.getInstance().getMessageGenerator().messageGenerate(EventType.NODE_CANNOT_HAVE_CHILDREN);
             return;
+        }
 
 
         MapNode child = createChild((MapNodeComposite)parent.getMapNode());
         parent.add(new MapTreeItem(child));
+        System.out.println(child.getName());
         ((MapNodeComposite) parent.getMapNode()).addChild(child);
+        child.setParent(((MapNodeComposite) parent.getMapNode()));
+        System.out.println(((MapNodeComposite) parent.getMapNode()).getListOfChildren());
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
         System.out.println(((MapNodeComposite) parent.getMapNode()).getListOfChildren());
