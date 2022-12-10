@@ -18,6 +18,16 @@ public class ActionMenager {
 
     private AddAuthorAction addAuthorAction;
 
+    private AddTitleAction addTitleAction;
+
+    private AddLinkAction addLinkAction;
+
+    private  SelectAction selectAction;
+
+    private  DeleteItemAction deleteItemAction;
+
+    private  SettingsAction settingsAction;
+
     public ActionMenager(){
         initialiseActions();
     }
@@ -28,6 +38,11 @@ public class ActionMenager {
         infoAction = new InfoAction();
         removeAction = new RemoveAction();
         addAuthorAction = new AddAuthorAction();
+        addTitleAction = new AddTitleAction();
+        addLinkAction = new AddLinkAction();
+        selectAction = new SelectAction();
+        deleteItemAction = new DeleteItemAction();
+        settingsAction = new SettingsAction();
     }
 
 

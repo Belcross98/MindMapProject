@@ -32,6 +32,9 @@ public class MessageGeneratorImplementation implements MessageGenerator, IPublis
         if (type == EventType.NODE_CANNOT_HAVE_CHILDREN) {
             msg = new Message("You can not add node!", MessageType.ERROR, LocalDateTime.now());
         }
+        if(type == EventType.NO_ELEMENT_FOUND){
+            msg = new Message("No element found", MessageType.WARNING, LocalDateTime.now());
+        }
         notifySubscribers(msg);
         return msg;
     }

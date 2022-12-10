@@ -1,16 +1,29 @@
-package dsw.gerumap.app.gui.swing.workspace;
+package dsw.gerumap.app.gui.swing.grapheditor.workspace;
 
+import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
+import dsw.gerumap.app.gui.swing.state.StateManager;
 import dsw.gerumap.app.maprepository.composite.MapNode;
 import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.implementation.Project;
 import dsw.gerumap.app.maprepository.observer.ISubscriber;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+
 public class ProjectView extends JPanel implements ISubscriber {
+
+    private Project p;
+
+    private StateManager stateManager;
+
+    private  MindMap mindMap;
 
     private String projectName;
     private String authorName;
@@ -24,15 +37,22 @@ public class ProjectView extends JPanel implements ISubscriber {
     private JTabbedPane tabbedPane;
     private List<MapView> tabs;
 
+    private Settings settings;
+
    public ProjectView(){
+
        this.projectName1 = new JLabel();
        this.authorName1 = new JLabel();
        this.tabbedPane = new JTabbedPane();
        this.tabs = new ArrayList<>();
+       this.mindMap = new MindMap();
+       this.settings = new Settings(new Frame());
        add(projectName1);
        add(authorName1);
        add(tabbedPane);
        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+       stateManager = new StateManager();
 
        authorName1.setVisible(true);
        projectName1.setVisible(true);
@@ -45,6 +65,23 @@ public class ProjectView extends JPanel implements ISubscriber {
 
    }
 
+   public void startAddTittleState(){
+       this.stateManager.setAddTittleState();
+   }
+   public void startAddLinkState(){
+       this.stateManager.setAddTittleState();
+   }
+   public void startDeleteState(){
+       this.stateManager.setDeleteState();
+   }
+
+   public MapView getMapView(){
+      return  ((MapView)tabbedPane.getSelectedComponent());
+   }
+
+   public void startSelectState(){
+       this.stateManager.setSelectState();
+   }
 
     public void refreshWorkspace(MapNode selectedProject){
 
@@ -64,6 +101,7 @@ public class ProjectView extends JPanel implements ISubscriber {
         for(MapNode child: ((Project) selectedProject).getListOfChildren()) {
             MapView tab = new MapView((MindMap) child);
             tabs.add(tab);
+
         }
 
         for(MapView tab : tabs)

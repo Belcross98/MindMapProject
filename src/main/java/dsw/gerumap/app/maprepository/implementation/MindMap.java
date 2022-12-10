@@ -33,6 +33,7 @@ public class MindMap extends MapNodeComposite implements IPublisher {
             Element element = (Element) child;
             if (!this.getListOfChildren().contains(element)){
                 this.getListOfChildren().add(element);
+                notifySubscribers(this);
             }
         }
     }
@@ -46,6 +47,7 @@ public class MindMap extends MapNodeComposite implements IPublisher {
     public void removeChild(MapNode child) {
         if(child != null && listOfChildren != null)
         listOfChildren.remove(child);
+        notifySubscribers(this);
 
     }
 

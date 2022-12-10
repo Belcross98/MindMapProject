@@ -3,12 +3,12 @@ package dsw.gerumap.app.gui.swing.view;
 import dsw.gerumap.app.core.ApplicationFramework;
 import dsw.gerumap.app.core.MessageGenerator;
 import dsw.gerumap.app.core.messagegen.Message;
-import dsw.gerumap.app.core.messagegen.MessageType;
 import dsw.gerumap.app.gui.swing.controller.ActionMenager;
+import dsw.gerumap.app.gui.swing.grapheditor.Palette;
 import dsw.gerumap.app.gui.swing.tree.view.MapTreeView;
 import dsw.gerumap.app.gui.swing.tree.MapTree;
 import dsw.gerumap.app.gui.swing.tree.MapTreeImplementation;
-import dsw.gerumap.app.gui.swing.workspace.ProjectView;
+import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
 import dsw.gerumap.app.maprepository.observer.ISubscriber;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,6 +37,8 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private MessageGenerator messageGenerator;
 
+    private Palette palette;
+
     private MainFrame(){
 
     }
@@ -45,6 +47,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         actionMenager = new ActionMenager();
         mapTree = new MapTreeImplementation();
         projectView = new ProjectView();
+        palette = new Palette();
         initialiseGUI();
 
     }
@@ -54,7 +57,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
-        setSize(screenWidth / 2, screenHeight / 2);
+        setSize((int)(screenWidth / 1.5), (int)(screenHeight / 1.5));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("GeRuMap App");
@@ -70,7 +73,11 @@ public class MainFrame extends JFrame implements ISubscriber {
         JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
         JPanel rightPanel = projectView;
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll, rightPanel);
+        JSplitPane split2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, rightPanel, palette);
+        split2.setResizeWeight(1);
+
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll, split2);
+
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);

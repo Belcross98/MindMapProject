@@ -32,10 +32,12 @@ public abstract class MapNode {
 
     @Override
     public boolean equals(Object obj){
-        if(obj != null && obj instanceof MapNode){
+       /* if(obj != null && obj instanceof MapNode){
             MapNode otherobj = (MapNode) obj;
             return this.getName().equals(otherobj.getName());
         }
-        return false;
+        */
+        return super.equals(obj);
+      //  return false;
     }
 }
