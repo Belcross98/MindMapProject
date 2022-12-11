@@ -18,12 +18,13 @@ public class AddTittleState extends State{
         String name = "Title";//JOptionPane.showInputDialog(MainFrame.getInstance(), "Enter your tiitle");
         if(name == null || name.isEmpty())
             return;
-        Title title = new Title(5, Color.BLACK, name, new Dimension(30, 30), pos, name, new Ellipse2D.Float(50, 50, 50, 50));
+        Title title = new Title(5,Color.BLACK, name, new Dimension(120, 60), pos, name);
         TitlePainter titlePainter = new TitlePainter(title);
         mapView.addPainter(titlePainter);
         mapView.getMindMap().addChild(title);
         title.addSubscriber(mapView);
         MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
+        String nodeName = MainFrame.getInstance().getProjectView().getTabbedPane().getSelectedComponent().getName();
         MainFrame.getInstance().getMapTree().addChild(selected);
 
 

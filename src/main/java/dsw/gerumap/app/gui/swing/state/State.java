@@ -1,10 +1,8 @@
 package dsw.gerumap.app.gui.swing.state;
 
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
-import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 public abstract class State {
 
