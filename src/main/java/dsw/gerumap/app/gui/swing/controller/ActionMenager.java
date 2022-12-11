@@ -28,6 +28,8 @@ public class ActionMenager {
 
     private  SettingsAction settingsAction;
 
+    private MoveAction moveAction;
+
     public ActionMenager(){
         initialiseActions();
     }
@@ -43,6 +45,7 @@ public class ActionMenager {
         selectAction = new SelectAction();
         deleteItemAction = new DeleteItemAction();
         settingsAction = new SettingsAction();
+        moveAction = new MoveAction();
     }
 
 
