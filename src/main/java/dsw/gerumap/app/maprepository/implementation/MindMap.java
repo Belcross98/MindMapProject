@@ -27,6 +27,8 @@ public class MindMap extends MapNodeComposite implements IPublisher {
 
     }
 
+
+
     @Override
     public void addChild(MapNode child) {
         if (child != null &&  child instanceof Element){
