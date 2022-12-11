@@ -1,14 +1,14 @@
 package dsw.gerumap.app.gui.swing.grapheditor.workspace;
 
-import dsw.gerumap.app.gui.swing.state.StateManager;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 
-import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class MouseController implements MouseListener, MouseMotionListener {
+
+
     @Override
     public void mouseClicked(MouseEvent e) {
         //Nista

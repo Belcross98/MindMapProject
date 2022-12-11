@@ -1,8 +1,11 @@
 package dsw.gerumap.app.gui.swing.state;
 
+import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +13,13 @@ import java.util.Map;
 public class SelectState extends State{
 
     private HashMap<ElementPainter,Color> restoreColor = new HashMap<>();
+    private Title first = null;
+    private Title second = null;
+    private Title third = null;
+    private Point position;
+    private TitlePainter titlePainter = null;
+
+
     @Override
     public void mousePressed(Point pos, MapView mapView) {
 
@@ -43,12 +53,71 @@ public class SelectState extends State{
 
     @Override
     public void mouseDragged(Point pos, MapView mapView) {
-        //Nista
+
+        int width = 0;
+        int height = 0;
+
+
+        if(first == null){
+            first = new Title(5,Color.BLACK, "", new Dimension(30, 15), pos, "");
+            position = pos;
+            second = first;
+        }
+
+        width = (int)  second.getSize().getWidth();
+        height = (int) second.getSize().getHeight();
+        mapView.removePainter(titlePainter);
+        Dimension newDimension = new Dimension(width + (pos.x - position.x)/100, height + (pos.y - position.y/2)/100 );
+
+        third = new Title( 5,Color.BLACK, "",newDimension, position, "");
+        titlePainter = new TitlePainter(third);
+        mapView.addPainter(titlePainter);
+        second = third;
+        mapView.repaint();
+
+
     }
 
     @Override
     public void mouseReleased(Point pos, MapView mapView) {
-        //Nista
+
+        if(titlePainter == null)
+            return;
+
+        for(ElementPainter painter:mapView.getPainters()){
+
+            if(painter == titlePainter)
+                continue;
+
+            if(titlePainter.getShape() == null){
+
+                mapView.removePainter(titlePainter);
+                first = null;
+                return;
+            }
+
+            Title title = (Title) painter.getElement();
+
+
+            if(titlePainter.getShape().intersects(title.getPosition().x,title.getPosition().y,title.getSize().width,title.getSize().height)){
+                mapView.getSelectedPainters().add(painter);
+                if(!(restoreColor.containsKey(painter))){
+
+                    restoreColor.put(painter,painter.getElement().getColor());
+                    mapView.getSelectedPainters().add(painter);
+                    }
+                painter.getElement().setColor(Color.BLUE);
+                painter.getElement().setSelected(true);
+
+            }
+
+
+        }
+
+        mapView.removePainter(titlePainter);
+        titlePainter = null;
+        first = null;
+        mapView.repaint();
     }
 
 

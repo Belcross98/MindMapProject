@@ -33,7 +33,8 @@ public class TitlePainter extends ElementPainter {
 
         if (element instanceof Title){
             Title  title = (Title) element;
-            shape = new Ellipse2D.Float(title.getPosition().x, title.getPosition().y, 120, 60);
+            shape = new Ellipse2D.Float(((Title) element).getPosition().x,((Title) element).getPosition().y,((Title) element).getSize().width,((Title) element).getSize().height);
+            ((Title) element).setShape(shape);
             g2.draw(shape);
             g2.drawString(title.getName(), (int)(title.getPosition().getX() + shape.getBounds().getWidth() / 2),
                     ((int)(title.getPosition().getY() + shape.getBounds().getHeight() / 2)));

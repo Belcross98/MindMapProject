@@ -21,9 +21,12 @@ public class MapView extends JPanel implements ISubscriber {
 
     private List<ElementPainter> painters;
     private List<ElementPainter> selectedPainters;
+    private MouseController mouseController;
 
     public MapView(MindMap mindMap){
-        addMouseListener(new MouseController());
+        mouseController = new MouseController();
+        addMouseListener(mouseController);
+        addMouseMotionListener(mouseController);
         painters = new ArrayList<>();
         selectedPainters = new ArrayList<>();
         this.mindMap = mindMap;
@@ -50,7 +53,6 @@ public class MapView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notification) {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         repaint();
     }
 
