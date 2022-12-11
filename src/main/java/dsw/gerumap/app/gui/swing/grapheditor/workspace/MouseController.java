@@ -30,6 +30,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
         if(projectView.getMapView() == null){
             return;
         }
+        System.out.println("I have GIVEN YOU THE TOOLS");
         projectView.getStateManager().getCurrentState().mouseReleased(e.getPoint(), projectView.getMapView());
 
     }

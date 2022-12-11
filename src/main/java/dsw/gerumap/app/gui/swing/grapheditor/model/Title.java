@@ -1,6 +1,5 @@
 package dsw.gerumap.app.gui.swing.grapheditor.model;
 
-import javafx.scene.shape.Ellipse;
 import lombok.Getter;
 import lombok.Setter;
 
