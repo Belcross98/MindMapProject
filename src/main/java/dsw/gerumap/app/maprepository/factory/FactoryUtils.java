@@ -5,7 +5,7 @@ import dsw.gerumap.app.maprepository.implementation.Element;
 import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.implementation.Project;
 import dsw.gerumap.app.maprepository.implementation.ProjectExplorer;
-import javafx.scene.Node;
+
 
 public  class FactoryUtils {
 

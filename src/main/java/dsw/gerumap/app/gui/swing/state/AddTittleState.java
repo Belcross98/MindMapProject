@@ -3,14 +3,12 @@ package dsw.gerumap.app.gui.swing.state;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
-import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
+import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
-import java.util.Random;
+
 
 
 public class AddTittleState extends State{
@@ -24,6 +22,12 @@ public class AddTittleState extends State{
         TitlePainter titlePainter = new TitlePainter(title);
         mapView.addPainter(titlePainter);
         mapView.getMindMap().addChild(title);
+        title.addSubscriber(mapView);
+        MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
+        MainFrame.getInstance().getMapTree().addChild(selected);
+
+
+
     }
 
     @Override
