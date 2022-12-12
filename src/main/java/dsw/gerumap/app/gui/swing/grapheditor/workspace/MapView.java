@@ -1,7 +1,7 @@
 package dsw.gerumap.app.gui.swing.grapheditor.workspace;
 
+import dsw.gerumap.app.gui.swing.grapheditor.controller.MouseController;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
-import dsw.gerumap.app.maprepository.implementation.Element;
 import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.observer.ISubscriber;
 import lombok.Getter;
