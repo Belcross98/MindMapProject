@@ -1,5 +1,8 @@
 package dsw.gerumap.app.gui.swing.controller;
 
+import dsw.gerumap.app.gui.swing.state.StateManager;
+import dsw.gerumap.app.gui.swing.view.MainFrame;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -14,6 +17,8 @@ public class MoveAction extends AbstractGerumapAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        MainFrame.getInstance().getProjectView().startMoveState();
 
     }
 }

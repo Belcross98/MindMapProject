@@ -17,8 +17,7 @@ public class DeleteItemAction extends  AbstractGerumapAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        StateManager stateManager = MainFrame.getInstance().getProjectView().getStateManager();
-        stateManager.setDeleteState();
 
+        MainFrame.getInstance().getProjectView().startDeleteState();
     }
 }

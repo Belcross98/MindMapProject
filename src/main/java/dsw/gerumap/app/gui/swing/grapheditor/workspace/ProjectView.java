@@ -74,6 +74,7 @@ public class ProjectView extends JPanel implements ISubscriber {
    public void startDeleteState(){
        this.stateManager.setDeleteState();
    }
+   public void startMoveState(){this.stateManager.setMoveState();}
 
    public MapView getMapView(){
       return  ((MapView)tabbedPane.getSelectedComponent());

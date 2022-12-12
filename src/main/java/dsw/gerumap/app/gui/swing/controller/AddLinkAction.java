@@ -22,7 +22,6 @@ public class AddLinkAction extends AbstractGerumapAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        StateManager stateManager = MainFrame.getInstance().getProjectView().getStateManager();
-             stateManager.setAddLinkState();
+        MainFrame.getInstance().getProjectView().startAddLinkState();
     }
 }

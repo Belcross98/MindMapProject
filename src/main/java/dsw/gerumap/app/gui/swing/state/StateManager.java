@@ -12,6 +12,8 @@ public class StateManager {
 
     private SelectState selectState;
 
+    private MoveState moveState;
+
     public StateManager(){
         initialiseStates();
     }
@@ -21,6 +23,7 @@ public class StateManager {
         addLinkState = new AddLinkState();
         deleteState = new DeleteState();
         selectState = new SelectState();
+        moveState = new MoveState();
         currentState = addTittleState;
     }
 
@@ -32,9 +35,7 @@ public class StateManager {
         currentState = addTittleState;
     }
 
-    public void setAddLinkState() {
-        currentState = addLinkState;
-    }
+    public void setAddLinkState() {currentState = addLinkState;}
 
     public void setDeleteState() {
         currentState = deleteState;
@@ -43,4 +44,6 @@ public class StateManager {
     public void setSelectState() {
         currentState = selectState;
     }
+
+    public void setMoveState() { currentState = moveState; }
 }

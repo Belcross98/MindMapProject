@@ -100,7 +100,6 @@ public class SelectState extends State{
 
 
             if(titlePainter.getShape().intersects(title.getPosition().x,title.getPosition().y,title.getSize().width,title.getSize().height)){
-                mapView.getSelectedPainters().add(painter);
                 if(!(restoreColor.containsKey(painter))){
 
                     restoreColor.put(painter,painter.getElement().getColor());

@@ -19,7 +19,7 @@ public class SelectAction extends AbstractGerumapAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        StateManager stateManager = MainFrame.getInstance().getProjectView().getStateManager();
-        stateManager.setSelectState();
+
+        MainFrame.getInstance().getProjectView().startSelectState();
     }
 }
