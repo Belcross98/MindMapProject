@@ -1,7 +1,12 @@
 package dsw.gerumap.app.gui.swing.grapheditor.workspace;
 
+import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
+import dsw.gerumap.app.gui.swing.view.MainFrame;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Settings extends JDialog {
 
@@ -21,14 +26,31 @@ public class Settings extends JDialog {
         JPanel northJPanel = new JPanel();
         add(northJPanel, BorderLayout.NORTH);
         northJPanel.setLayout(new BoxLayout(northJPanel, BoxLayout.X_AXIS));
+        jTextField.setPreferredSize(new Dimension(10, 10));
         northJPanel.add(jTextField);
         northJPanel.add(jButton1);
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color color = new Color(255, 255, 255);
+            }
+        });
         northJPanel.add(jButton2);
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+            }
+        });
 
         JPanel centerPanel = new JPanel();
         add(centerPanel, BorderLayout.CENTER);
         jColorChooser = new JColorChooser();
         centerPanel.add(jColorChooser);
+
+
+
 
     }
 }

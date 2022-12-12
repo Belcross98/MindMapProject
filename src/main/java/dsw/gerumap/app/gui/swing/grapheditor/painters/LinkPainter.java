@@ -16,22 +16,30 @@ public class LinkPainter extends ElementPainter {
     @Override
     public void paint(Graphics2D g) {
 
-        g.setPaint(element.getColor());
+        Graphics2D g2 = (Graphics2D) g;
 
-        g.setStroke(new BasicStroke(element.getWidth()));
+        g2.setPaint(element.getColor());
+
+        g2.setStroke(new BasicStroke(element.getWidth()));
+      //  g2.setColor(new Color());
 
 
         Link link = (Link) element;
         Title from = (Title) link.getFrom();
         Title to = (Title) link.getTo();
 
-        g.drawLine(from.getPosition().x, from.getPosition().y, to.getPosition().x, to.getPosition().y);
+        g2.drawLine(from.getPosition().x, from.getPosition().y, to.getPosition().x, to.getPosition().y);
 
 
     }
 
     @Override
     public boolean elementAt(Point pos) {
-        return false;
+        Link link = (Link) element;
+        Title from = (Title) link.getFrom();
+        if(from == null) {
+            return false;
+        }
+        return  true;
     }
 }

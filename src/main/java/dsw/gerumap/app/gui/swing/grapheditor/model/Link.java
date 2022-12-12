@@ -14,7 +14,6 @@ public class Link extends DiagramElement {
     protected DiagramElement to;
 
     public Link(int width, Color color, String description, DiagramElement from, DiagramElement to) {
-
         super(width, color, description);
         this.from = from;
         this.to = to;
