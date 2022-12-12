@@ -1,5 +1,6 @@
 package dsw.gerumap.app.gui.swing.controller;
 
+import dsw.gerumap.app.gui.swing.grapheditor.controller.CancelAction;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +30,7 @@ public class ActionMenager {
     private  SettingsAction settingsAction;
 
     private MoveAction moveAction;
+
 
     public ActionMenager(){
         initialiseActions();

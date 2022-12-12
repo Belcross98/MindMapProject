@@ -1,5 +1,6 @@
-package dsw.gerumap.app.gui.swing.grapheditor.workspace;
+package dsw.gerumap.app.gui.swing.grapheditor.controller;
 
+import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 
 import java.awt.event.MouseEvent;

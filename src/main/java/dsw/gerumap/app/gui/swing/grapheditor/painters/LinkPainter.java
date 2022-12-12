@@ -18,7 +18,7 @@ public class LinkPainter extends ElementPainter {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.setPaint(element.getColor());
+        g2.setPaint(element.getCurrentColor());
 
         g2.setStroke(new BasicStroke(element.getWidth()));
       //  g2.setColor(new Color());

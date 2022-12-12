@@ -26,7 +26,7 @@ public class SelectState extends State{
 
         for(Map.Entry<ElementPainter,Color> entry:restoreColor.entrySet()){
 
-            entry.getKey().getElement().setColor(entry.getValue());
+            entry.getKey().getElement().setCurrentColor(entry.getValue());
             entry.getKey().getElement().setSelected(false);
             mapView.getSelectedPainters().removeAll(mapView.getSelectedPainters());
 
@@ -42,7 +42,7 @@ public class SelectState extends State{
                     mapView.getSelectedPainters().add(p);
                 }
 
-                p.getElement().setColor(Color.BLUE);
+                p.getElement().setCurrentColor(Color.BLUE);
                 p.getElement().setSelected(true);
 
             }
@@ -106,7 +106,7 @@ public class SelectState extends State{
                     restoreColor.put(painter,painter.getElement().getColor());
                     mapView.getSelectedPainters().add(painter);
                     }
-                painter.getElement().setColor(Color.BLUE);
+                painter.getElement().setCurrentColor(Color.BLUE);
                 painter.getElement().setSelected(true);
 
             }

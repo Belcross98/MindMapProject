@@ -13,9 +13,11 @@ public class DiagramElement extends Element {
 
     int width;
     Color color;
+    Color currentColor;
     protected String description;
 
     public DiagramElement(int width, Color color, String description){
+        this.currentColor = color;
         this.width = width;
         this.color = color;
         this.description = description;

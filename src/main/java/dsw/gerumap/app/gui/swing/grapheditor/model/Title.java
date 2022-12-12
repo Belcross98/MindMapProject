@@ -15,8 +15,8 @@ public class Title extends DiagramElement {
 
     protected String name;
     protected Point position;
-    protected Shape shape;
 
+    protected Shape shape;
 
     public Title(int width, Color color, String description, Dimension size, Point position, String name) {
         super(width, color, description);
