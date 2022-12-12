@@ -11,13 +11,20 @@ public class DeleteState extends State{
 
     @Override
     public void mousePressed(Point pos, MapView mapView) {
+
         ElementPainter painter = mapView.elementPainter(pos);
         if(painter == null){
             AppCore.getInstance().getMessageGenerator().messageGenerate(EventType.NO_ELEMENT_FOUND);
             return;
         }
-        mapView.removePainter(painter);
-        mapView.getMindMap().removeChild(painter.getElement());
+
+        for(ElementPainter p : mapView.getSelectedPainters()){
+
+            mapView.removePainter(p);
+            mapView.getMindMap().removeChild(p.getElement());
+
+        }
+
     }
 
     @Override
