@@ -5,6 +5,7 @@ import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 
 import java.awt.*;
+import java.awt.geom.GeneralPath;
 
 public class LinkPainter extends ElementPainter {
 
@@ -23,23 +24,34 @@ public class LinkPainter extends ElementPainter {
         g2.setStroke(new BasicStroke(element.getWidth()));
       //  g2.setColor(new Color());
 
+        Link link = (Link) element;
+        g2.drawLine(link.getFromPoint().x,link.getFromPoint().y,link.getToPoint().x,link.getToPoint().y);
 
+        /*
         Link link = (Link) element;
         Title from = (Title) link.getFrom();
         Title to = (Title) link.getTo();
 
         g2.drawLine(from.getPosition().x, from.getPosition().y, to.getPosition().x, to.getPosition().y);
 
+         */
 
     }
 
     @Override
     public boolean elementAt(Point pos) {
+
+
         Link link = (Link) element;
         Title from = (Title) link.getFrom();
-        if(from == null) {
+        Title to = (Title) link.getTo();
+
+        if(to == null || from == null)
             return false;
+
+        if(from.getShape().contains(pos) || to.getShape().contains(pos)) {
+            return true;
         }
-        return  true;
+        return  false;
     }
 }

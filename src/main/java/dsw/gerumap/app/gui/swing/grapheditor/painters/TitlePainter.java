@@ -35,7 +35,7 @@ public class TitlePainter extends ElementPainter {
 
         if (element instanceof Title){
             Title  title = (Title) element;
-            title.setSize(new Dimension(10 +stringWidth * 4, title.getSize().height));
+            //title.setSize(new Dimension(10 +stringWidth * 4, title.getSize().height));
             String name = title.getName();
             shape = new Ellipse2D.Float(title.getPosition().x,title.getPosition().y,title.getSize().width,title.getSize().height);
             title.setShape(shape);

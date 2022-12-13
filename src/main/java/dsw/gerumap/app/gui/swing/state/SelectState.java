@@ -1,7 +1,9 @@
 package dsw.gerumap.app.gui.swing.state;
 
+import com.sun.jdi.request.InvalidRequestStateException;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import java.awt.*;
@@ -69,6 +71,7 @@ public class SelectState extends State{
         mapView.removePainter(titlePainter);
         Dimension newDimension = new Dimension(width + (pos.x - position.x)/100, height + (pos.y - position.y/2)/100 );
 
+
         third = new Title( 5,Color.BLACK, "",newDimension, position, "");
         titlePainter = new TitlePainter(third);
         mapView.addPainter(titlePainter);
@@ -86,7 +89,7 @@ public class SelectState extends State{
 
         for(ElementPainter painter:mapView.getPainters()){
 
-            if(painter == titlePainter)
+            if(painter == titlePainter || painter instanceof LinkPainter)
                 continue;
 
             if(titlePainter.getShape() == null){
