@@ -102,6 +102,7 @@ public class ProjectView extends JPanel implements ISubscriber {
         for(MapNode child: ((Project) selectedProject).getListOfChildren()) {
             MapView tab = new MapView((MindMap) child);
             tabs.add(tab);
+            System.out.println("111111111111111111111111111111");
 
         }
 

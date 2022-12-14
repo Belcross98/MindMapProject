@@ -15,6 +15,7 @@ public class SaveAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         MapView mapView = MainFrame.getInstance().getProjectView().getMapView();
         Color color = MainFrame.getInstance().getProjectView().getSettings().getJColorChooser().getColor();
         String name = MainFrame.getInstance().getProjectView().getSettings().getJTextField().getText();
@@ -27,6 +28,7 @@ public class SaveAction implements ActionListener {
             painter.getElement().setCurrentColor(color);
             painter.getElement().setName(name);
             painter.getElement().setWidth(stroke);
+
 
         }
         MainFrame.getInstance().getProjectView().getMapView().repaint();

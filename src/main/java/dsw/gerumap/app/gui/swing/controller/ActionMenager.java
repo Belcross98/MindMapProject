@@ -31,6 +31,10 @@ public class ActionMenager {
 
     private MoveAction moveAction;
 
+    private ZoomInAction zoomInAction;
+
+    private ZoomOutAction zoomOutAction;
+
 
     public ActionMenager(){
         initialiseActions();
@@ -48,6 +52,8 @@ public class ActionMenager {
         deleteItemAction = new DeleteItemAction();
         settingsAction = new SettingsAction();
         moveAction = new MoveAction();
+        zoomInAction = new ZoomInAction();
+        zoomOutAction = new ZoomOutAction();
     }
 
 

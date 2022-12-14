@@ -22,6 +22,10 @@ public class Palette extends JToolBar {
         add(MainFrame.getInstance().getActionMenager().getSettingsAction());
         addSeparator();
         add(MainFrame.getInstance().getActionMenager().getMoveAction());
+        addSeparator();
+        add(MainFrame.getInstance().getActionMenager().getZoomInAction());
+        addSeparator();
+        add(MainFrame.getInstance().getActionMenager().getZoomOutAction());
 
     }
 }

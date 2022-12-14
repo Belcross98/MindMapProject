@@ -11,6 +11,7 @@ public class CancelAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         MainFrame.getInstance().getProjectView().getSettings().setVisible(false);
         MainFrame.getInstance().getProjectView().getSettings().getJTextField().setText("");
+        MainFrame.getInstance().getProjectView().getSettings().getJTextField2().setText("");
         MainFrame.getInstance().getProjectView().getMapView().repaint();
     }
 }
