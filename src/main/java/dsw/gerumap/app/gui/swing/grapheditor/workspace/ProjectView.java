@@ -69,7 +69,7 @@ public class ProjectView extends JPanel implements ISubscriber {
        this.stateManager.setAddTittleState();
    }
    public void startAddLinkState(){
-       this.stateManager.setAddTittleState();
+       this.stateManager.setAddLinkState();
    }
    public void startDeleteState(){
        this.stateManager.setDeleteState();
