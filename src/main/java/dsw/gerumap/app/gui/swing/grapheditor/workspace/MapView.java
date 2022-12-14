@@ -20,17 +20,13 @@ import java.util.List;
 public class MapView extends JPanel implements ISubscriber {
 
     private MindMap mindMap;
-
     private List<ElementPainter> painters;
     private List<ElementPainter> selectedPainters;
     private MouseController mouseController;
 
     private double  zoomFactor = 1;
-
     AffineTransform affineTransform = new AffineTransform();
-
     private double xTranslate = 0;
-
     private double yTranslate = 0;
 
 
