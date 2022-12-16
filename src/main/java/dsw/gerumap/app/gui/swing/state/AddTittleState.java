@@ -26,8 +26,6 @@ public class AddTittleState extends State{
         MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
         MainFrame.getInstance().getMapTree().addChild(selected);
 
-
-
     }
 
     @Override
