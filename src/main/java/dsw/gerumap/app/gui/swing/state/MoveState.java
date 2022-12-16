@@ -23,6 +23,10 @@ public class MoveState extends State{
 
         for(ElementPainter painter: mapView.getSelectedPainters())
         {
+
+            if(painter instanceof LinkPainter)
+                continue;
+
             Title title = (Title) painter.getElement();
 
             if(painter.elementAt(pos)){
@@ -46,6 +50,9 @@ public class MoveState extends State{
 
 
         for(ElementPainter painter: mapView.getSelectedPainters()){
+
+            if(painter instanceof LinkPainter)
+                continue;
 
 
             if(painter instanceof TitlePainter) {
@@ -91,7 +98,6 @@ public class MoveState extends State{
 
         }
         originalPosition= pos;
-        mapView.repaint();
     }
 
     @Override

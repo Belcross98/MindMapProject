@@ -8,9 +8,12 @@ import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
+import dsw.gerumap.app.maprepository.observer.ISubscriber;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DeleteState extends State{
 
@@ -25,6 +28,20 @@ public class DeleteState extends State{
 
         for(ElementPainter p : mapView.getSelectedPainters()){
 
+           p.getElement().removeSubscriber(mapView);
+
+
+
+            if(p instanceof LinkPainter){
+
+
+                ((Title)((Link)p.getElement()).getFrom()).removeLink((LinkPainter) p);
+                ((Title)((Link)p.getElement()).getTo()).removeLink((LinkPainter) p);
+                mapView.getPainters().remove(p);
+
+            }
+
+
             if(p instanceof TitlePainter) {
 
                 Title title = (Title) p.getElement();
@@ -33,23 +50,30 @@ public class DeleteState extends State{
 
                 if(!(title.getLinks().isEmpty())){
 
-                    ArrayList<LinkPainter> painters = title.getLinks();
+                    HashMap<Title,LinkPainter> linked = new HashMap<>();
 
                     for(LinkPainter linkPainter:title.getLinks()) {
 
                         mapView.getPainters().remove(linkPainter);
-//                      ((Title) ((Link)linkPainter.getElement()).getFrom()).getLinks().remove(linkPainter);
-//                      ((Title) ((Link)linkPainter.getElement()).getTo()).getLinks().remove(linkPainter);
+                        linked.put( ((Title) ((Link)linkPainter.getElement()).getFrom()),linkPainter);
+                        linked.put( ((Title) ((Link)linkPainter.getElement()).getTo()),linkPainter);
+
 
                     }
-                    //title.getLinks().removeAll(title.getLinks());
 
+                   for(Map.Entry<Title,LinkPainter> entry: linked.entrySet()){
+
+                       entry.getKey().removeLink(entry.getValue());
+
+                    }
+                    linked.clear();
 
                 }
 
            }
         }
 
+        mapView.getSelectedPainters().clear();
     }
 
     @Override

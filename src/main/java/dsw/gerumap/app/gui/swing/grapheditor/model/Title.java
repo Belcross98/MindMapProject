@@ -31,6 +31,11 @@ public class Title extends DiagramElement implements IPublisher {
     }
 
 
+    public void setSize(Dimension size) {
+        notifySubscribers(this);
+        this.size = size;
+    }
+
     public void addLink(LinkPainter link){
         notifySubscribers(this);
         links.add(link);
@@ -42,4 +47,8 @@ public class Title extends DiagramElement implements IPublisher {
     }
 
 
+    public void setPosition(Point2D position) {
+        notifySubscribers(this);
+        this.position = position;
+    }
 }

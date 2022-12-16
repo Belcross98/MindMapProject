@@ -15,7 +15,6 @@ public class SelectState extends State{
 
     private HashMap<ElementPainter,Color> restoreColor = new HashMap<>();
     private Title first = null;
-    private Title second = null;
     private Point2D position;
     private TitlePainter titlePainter = null;
 
@@ -64,22 +63,18 @@ public class SelectState extends State{
             position = new Point2D.Double(pos.getX(),pos.getY());
         }
 
-        if(position.getX() > pos.getX())
-            position.setLocation(pos.getX(),position.getY());
-        if(position.getY() > pos.getY())
-            position.setLocation(position.getX(),pos.getY());
-
+        if(titlePainter == null)
+            titlePainter = new TitlePainter(first);
+        if(titlePainter.getElement().getSubscribers()!=null)
+            titlePainter.getElement().removeSubscriber(mapView);
+        titlePainter.getElement().addSubscriber(mapView);
         width = (int)  first.getSize().getWidth();
         height = (int) first.getSize().getHeight();
         mapView.removePainter(titlePainter);
         Dimension newDimension = new Dimension((int) (width + (pos.x - position.getX())/100), (int) (height + (pos.y - position.getY()/2)/100));
-
-
-        second = new Title( 5,Color.BLACK, "",newDimension, position, "");
-        titlePainter = new TitlePainter(second);
+        first.setSize(newDimension);
+        titlePainter.setElement(first);
         mapView.addPainter(titlePainter);
-        first = second;
-        mapView.repaint();
 
 
 
@@ -121,10 +116,10 @@ public class SelectState extends State{
         }
 
         mapView.removePainter(titlePainter);
+        ((Title)titlePainter.getElement()).setSize(null);
+        titlePainter.getElement().removeSubscriber(mapView);
         titlePainter = null;
         first = null;
-        second = null;
-        mapView.repaint();
     }
 
 

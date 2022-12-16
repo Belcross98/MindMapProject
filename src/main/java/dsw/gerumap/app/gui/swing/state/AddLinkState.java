@@ -46,11 +46,14 @@ public class AddLinkState extends  State{
         if(link.getFrom() == null)
             return;
 
+
+        if(link.getSubscribers() != null)
+            link.removeSubscriber(mapView);
+        link.addSubscriber(mapView);
         mapView.removePainter(linkPainter);
-        link.setToPoint(pos);
         linkPainter.setElement(link);
+        link.setToPoint(pos);
         mapView.addPainter(linkPainter);
-        mapView.repaint();
 
     }
 
@@ -103,7 +106,6 @@ public class AddLinkState extends  State{
         ((Title) link.getTo()).addLink(linkPainter);
         mapView.addPainter(linkPainter);
         link.addSubscriber(mapView);
-        mapView.repaint();
 
 
 

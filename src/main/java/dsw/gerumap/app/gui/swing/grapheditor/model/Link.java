@@ -29,4 +29,14 @@ public class Link extends DiagramElement implements IPublisher {
     }
 
 
+    public void setToPoint(Point2D toPoint) {
+
+        notifySubscribers(this);
+        this.toPoint = toPoint;
+    }
+
+    public void setFromPoint(Point2D fromPoint) {
+        notifySubscribers(this);
+        this.fromPoint = fromPoint;
+    }
 }
