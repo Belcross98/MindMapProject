@@ -2,6 +2,7 @@ package dsw.gerumap.app.gui.swing.state;
 
 import dsw.gerumap.app.AppCore;
 import dsw.gerumap.app.core.messagegen.EventType;
+import dsw.gerumap.app.gui.swing.grapheditor.model.DiagramElement;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 
@@ -36,4 +37,10 @@ public class DeleteState extends State{
     public void mouseReleased(Point pos, MapView mapView) {
         //Nista
     }
+
+    public void removeChild(DiagramElement element){
+
+
+    }
+
 }

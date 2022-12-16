@@ -1,13 +1,12 @@
 package dsw.gerumap.app.gui.swing.state;
 
-import dsw.gerumap.app.gui.swing.grapheditor.model.DiagramElement;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
-import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
+
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

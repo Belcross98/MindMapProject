@@ -27,8 +27,6 @@ public class AddTittleState extends State{
         String nodeName = MainFrame.getInstance().getProjectView().getTabbedPane().getSelectedComponent().getName();
         MainFrame.getInstance().getMapTree().addChild(selected);
 
-
-
     }
 
     @Override

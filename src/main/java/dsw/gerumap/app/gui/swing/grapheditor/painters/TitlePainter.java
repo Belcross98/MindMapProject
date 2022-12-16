@@ -2,10 +2,12 @@ package dsw.gerumap.app.gui.swing.grapheditor.painters;
 
 import dsw.gerumap.app.gui.swing.grapheditor.model.DiagramElement;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
+import dsw.gerumap.app.gui.swing.view.MainFrame;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 
 @Getter
@@ -48,6 +50,7 @@ public class TitlePainter extends ElementPainter {
 
     @Override
     public boolean elementAt(Point pos) {
-        return getShape().contains(pos);
+        AffineTransform affineTransform = MainFrame.getInstance().getProjectView().getMapView().getAffineTransform();
+        return getShape().contains(pos.x / affineTransform.getScaleX(), pos.y / affineTransform.getScaleY());
     }
 }

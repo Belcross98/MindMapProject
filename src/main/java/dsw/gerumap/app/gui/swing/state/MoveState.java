@@ -5,6 +5,7 @@ import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
+import dsw.gerumap.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -33,17 +34,25 @@ public class MoveState extends State{
             }
 
         }
-
+            originalPosition = pos;
 
     }
 
     @Override
     public void mouseDragged(Point pos, MapView mapView) {
 
-        System.out.println(mapView.getSelectedPainters().size()+"Broj selektovanih");
-
         if(originalPosition == null)
             return;
+
+
+        if(temp == null){
+            ProjectView projectView = MainFrame.getInstance().getProjectView();
+            MapView currMapView = (MapView) projectView.getTabbedPane().getSelectedComponent();
+            currMapView.pan(pos.getX() - originalPosition.getX(), pos.getY() - originalPosition.getY());
+            return;
+        }
+
+        System.out.println(mapView.getSelectedPainters().size()+"Broj selektovanih");
 
 
         for(ElementPainter painter: mapView.getSelectedPainters()){
