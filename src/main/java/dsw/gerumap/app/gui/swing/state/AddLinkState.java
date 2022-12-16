@@ -11,6 +11,7 @@ import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 
 public class AddLinkState extends  State{
 
@@ -79,13 +80,30 @@ public class AddLinkState extends  State{
 
 
         Title from = (Title) link.getFrom();
-
         Title to = (Title) link.getTo();
 
-        link.setFromPoint(from.getPosition());
-        link.setToPoint(to.getPosition());
+        Point2D a = from.getPosition();
+        Point2D b = to.getPosition();
+
+        int xFOffset = (int) (from.getSize().getWidth()/2);
+        int yFOffset = (int) (from.getSize().getHeight()/2);
+        int xTOffset = (int) (to.getSize().getWidth()/2);
+        int yTOffset = (int) (to.getSize().getHeight()/2);
+
+        Point2D c = new Point((int) (a.getX()+xFOffset), (int) (a.getY()+yFOffset));
+        Point2D d = new Point((int) (b.getX()+xTOffset), (int) (b.getY()+yTOffset));
+
+
+        link.setFromPoint(c);
+        link.setToPoint(d);
+
+
+
         linkPainter.setElement(link);
+        ((Title) link.getFrom()).addLink(linkPainter);
+        ((Title) link.getTo()).addLink(linkPainter);
         mapView.addPainter(linkPainter);
+        link.addSubscriber(mapView);
         mapView.repaint();
 
 

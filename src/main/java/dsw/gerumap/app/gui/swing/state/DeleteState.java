@@ -2,10 +2,15 @@ package dsw.gerumap.app.gui.swing.state;
 
 import dsw.gerumap.app.AppCore;
 import dsw.gerumap.app.core.messagegen.EventType;
+import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
+import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class DeleteState extends State{
 
@@ -20,9 +25,29 @@ public class DeleteState extends State{
 
         for(ElementPainter p : mapView.getSelectedPainters()){
 
-            mapView.removePainter(p);
-            mapView.getMindMap().removeChild(p.getElement());
+            if(p instanceof TitlePainter) {
 
+                Title title = (Title) p.getElement();
+                mapView.removePainter(p);
+                mapView.getMindMap().removeChild(p.getElement());
+
+                if(!(title.getLinks().isEmpty())){
+
+                    ArrayList<LinkPainter> painters = title.getLinks();
+
+                    for(LinkPainter linkPainter:title.getLinks()) {
+
+                        mapView.getPainters().remove(linkPainter);
+//                      ((Title) ((Link)linkPainter.getElement()).getFrom()).getLinks().remove(linkPainter);
+//                      ((Title) ((Link)linkPainter.getElement()).getTo()).getLinks().remove(linkPainter);
+
+                    }
+                    //title.getLinks().removeAll(title.getLinks());
+
+
+                }
+
+           }
         }
 
     }

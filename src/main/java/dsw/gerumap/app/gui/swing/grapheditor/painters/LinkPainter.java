@@ -6,8 +6,16 @@ import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 
 import java.awt.*;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RectangularShape;
 
 public class LinkPainter extends ElementPainter {
+
+    private int xOffset  = 10;
+    private int yOffset = 10;
+
+    private int negativeX = -xOffset;
+    private int negativeY = -yOffset;
 
     public LinkPainter(DiagramElement element) {
         super(element);
@@ -20,38 +28,47 @@ public class LinkPainter extends ElementPainter {
         Graphics2D g2 = (Graphics2D) g;
 
         g2.setPaint(element.getCurrentColor());
-
         g2.setStroke(new BasicStroke(element.getWidth()));
-      //  g2.setColor(new Color());
-
         Link link = (Link) element;
-        g2.drawLine(link.getFromPoint().x,link.getFromPoint().y,link.getToPoint().x,link.getToPoint().y);
 
-        /*
-        Link link = (Link) element;
-        Title from = (Title) link.getFrom();
-        Title to = (Title) link.getTo();
+        Shape shape=new GeneralPath();
 
-        g2.drawLine(from.getPosition().x, from.getPosition().y, to.getPosition().x, to.getPosition().y);
+        if(link.getToPoint().getY() > link.getFromPoint().getY())
+            yOffset = negativeY;
+        else
+            yOffset = Math.abs(negativeY);
+        if(link.getToPoint().getX() > link.getFromPoint().getX())
+            xOffset = negativeX;
+        else
+            xOffset = Math.abs(negativeX);
 
-         */
+
+        ((GeneralPath)shape).moveTo(link.getFromPoint().getX() + xOffset,link.getFromPoint().getY() - yOffset);
+
+        ((GeneralPath)shape).lineTo(link.getToPoint().getX() + xOffset,link.getToPoint().getY()-yOffset);
+
+        ((GeneralPath)shape).lineTo(link.getToPoint().getX() - xOffset,link.getToPoint().getY() + yOffset);
+
+        ((GeneralPath)shape).lineTo(link.getFromPoint().getX() - xOffset,link.getFromPoint().getY() + yOffset);
+
+        ((GeneralPath)shape).closePath();
+
+        link.setShape(shape);
+        g2.drawLine((int) link.getFromPoint().getX(), (int) link.getFromPoint().getY(), (int) link.getToPoint().getX(), (int) link.getToPoint().getY());
+        //g2.draw(shape);
+
 
     }
+
+
 
     @Override
     public boolean elementAt(Point pos) {
 
-
         Link link = (Link) element;
-        Title from = (Title) link.getFrom();
-        Title to = (Title) link.getTo();
-
-        if(to == null || from == null)
-            return false;
-
-        if(from.getShape().contains(pos) || to.getShape().contains(pos)) {
+        if(link.getShape().contains(pos))
             return true;
-        }
+
         return  false;
     }
 }

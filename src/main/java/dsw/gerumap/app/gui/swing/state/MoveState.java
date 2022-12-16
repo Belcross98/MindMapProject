@@ -1,25 +1,24 @@
 package dsw.gerumap.app.gui.swing.state;
 
+import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 
 public class MoveState extends State{
 
-    private Point originalPosition = null;
+    private Point2D originalPosition = null;
     private Title temp = null;
 
     @Override
     public void mousePressed(Point pos, MapView mapView) {
-
-
-        System.out.println("BROJ Selektovanih PRE DRAGA =" +mapView.getSelectedPainters().size());
-        System.out.println("BROJ UKUPNIH PAINTERA JE " +mapView.getPainters().size());
 
 
         for(ElementPainter painter: mapView.getSelectedPainters())
@@ -40,7 +39,7 @@ public class MoveState extends State{
     @Override
     public void mouseDragged(Point pos, MapView mapView) {
 
-        System.out.println(mapView.getSelectedPainters().size()+"Broj selektovanih");
+
 
         if(originalPosition == null)
             return;
@@ -49,18 +48,45 @@ public class MoveState extends State{
         for(ElementPainter painter: mapView.getSelectedPainters()){
 
 
-            temp = (Title) painter.getElement();
-            mapView.getPainters().remove(painter);
-            double diffX =  (pos.getX()-originalPosition.getX());
-            double diffY =  (pos.getY()-originalPosition.getY());
+            if(painter instanceof TitlePainter) {
 
-            Point newPosition = new Point();
-            newPosition.setLocation(diffX + temp.getPosition().getX(),diffY + temp.getPosition().getY());
-            temp.setPosition(newPosition);
-            painter.setElement(temp);
-            mapView.addPainter(painter);
+                temp = (Title) painter.getElement();
+                mapView.getPainters().remove(painter);
+                double diffX = (pos.getX() - originalPosition.getX());
+                double diffY = (pos.getY() - originalPosition.getY());
+
+                Point newPosition = new Point();
+                newPosition.setLocation(diffX + temp.getPosition().getX(), diffY + temp.getPosition().getY());
+                temp.setPosition(newPosition);
+                painter.setElement(temp);
+                mapView.addPainter(painter);
 
 
+                if(!(temp.getLinks().isEmpty())){
+
+                    for(LinkPainter l : temp.getLinks()){
+
+                        mapView.getPainters().remove(l);
+                        Point2D a = temp.getPosition();
+                        int xFOffset = (int) (temp.getSize().getWidth()/2);
+                        int yFOffset = (int) (temp.getSize().getHeight()/2);
+                        Point2D b = new Point((int) (a.getX()+xFOffset), (int) (a.getY()+yFOffset));
+                        Link link = (Link) l.getElement();
+
+                        if(link.getFrom() == temp)
+                            link.setFromPoint(b);
+                        else
+                            link.setToPoint(b);
+
+                        l.setElement(link);
+                        mapView.getPainters().add(l);
+
+                    }
+
+
+                }
+
+            }
 
 
         }
