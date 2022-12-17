@@ -24,7 +24,7 @@ public class SelectState extends State{
 
         for(Map.Entry<ElementPainter,Color> entry:restoreColor.entrySet()){
 
-            entry.getKey().getElement().setCurrentColor(entry.getValue());
+            entry.getKey().getElement().setCurrentColor(entry.getKey().getElement().getColor());
             entry.getKey().getElement().setSelected(false);
             mapView.getSelectedPainters().removeAll(mapView.getSelectedPainters());
 

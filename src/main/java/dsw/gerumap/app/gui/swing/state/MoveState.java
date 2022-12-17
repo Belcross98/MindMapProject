@@ -7,9 +7,11 @@ import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
+import dsw.gerumap.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
 public class MoveState extends State{
@@ -19,6 +21,10 @@ public class MoveState extends State{
 
     @Override
     public void mousePressed(Point pos, MapView mapView) {
+
+        AffineTransform affineTransform = MainFrame.getInstance().getProjectView().getMapView().getAffineTransform();
+
+        originalPosition = new Point((int) ((pos.x - affineTransform.getTranslateX()) / affineTransform.getScaleX()), (int) ((pos.y - affineTransform.getTranslateX()) / affineTransform.getScaleY()));
 
 
         for(ElementPainter painter: mapView.getSelectedPainters())
@@ -31,7 +37,8 @@ public class MoveState extends State{
 
             if(painter.elementAt(pos)){
 
-                originalPosition = pos;
+                //originalPosition = pos;
+                temp = title;
                 break;
             }
 
@@ -43,10 +50,18 @@ public class MoveState extends State{
     @Override
     public void mouseDragged(Point pos, MapView mapView) {
 
-
+        AffineTransform affineTransform = MainFrame.getInstance().getProjectView().getMapView().getAffineTransform();
 
         if(originalPosition == null)
             return;
+
+        if(temp == null){
+            ProjectView projectView = MainFrame.getInstance().getProjectView();
+            MapView currMapView = (MapView) projectView.getTabbedPane().getSelectedComponent();
+            currMapView.pan(pos.getX() - originalPosition.getX(), pos.getY() - originalPosition.getY());
+            System.out.println("ABCDEFG");
+            return;
+        }
 
 
         for(ElementPainter painter: mapView.getSelectedPainters()){

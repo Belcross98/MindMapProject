@@ -1,10 +1,14 @@
 package dsw.gerumap.app.gui.swing.grapheditor.painters;
 
+import com.sun.tools.javac.Main;
 import dsw.gerumap.app.gui.swing.grapheditor.model.DiagramElement;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
+import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
+import dsw.gerumap.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
@@ -66,6 +70,7 @@ public class LinkPainter extends ElementPainter {
     public boolean elementAt(Point pos) {
 
         Link link = (Link) element;
+        AffineTransform affineTransform = MainFrame.getInstance().getProjectView().getMapView().getAffineTransform();
         if(link.getShape().contains(pos))
             return true;
 

@@ -47,6 +47,6 @@ public class TitlePainter extends ElementPainter {
     @Override
     public boolean elementAt(Point pos) {
         AffineTransform affineTransform = MainFrame.getInstance().getProjectView().getMapView().getAffineTransform();
-        return getShape().contains(pos.x / affineTransform.getScaleX(), pos.y / affineTransform.getScaleY());
+        return getShape().contains(pos.x , pos.y);
     }
 }

@@ -21,14 +21,15 @@ public class SaveAction implements ActionListener {
         String name = MainFrame.getInstance().getProjectView().getSettings().getJTextField().getText();
         List<ElementPainter> selectedPainters = mapView.getSelectedPainters();
         String stroke1 = MainFrame.getInstance().getProjectView().getSettings().getJTextField2().getText();
-        int stroke = Integer.parseInt(stroke1);
+        int stroke = -1;
+        if(!stroke1.isEmpty())  stroke = Integer.parseInt(stroke1);
 
         for(ElementPainter painter : selectedPainters){
+            if(stroke != - 1)
+                painter.getElement().setWidth(stroke);
             painter.getElement().setColor(color);
             painter.getElement().setCurrentColor(color);
             painter.getElement().setName(name);
-            painter.getElement().setWidth(stroke);
-
 
         }
         MainFrame.getInstance().getProjectView().getMapView().repaint();

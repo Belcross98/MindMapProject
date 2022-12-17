@@ -4,6 +4,7 @@ import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 import dsw.gerumap.app.maprepository.composite.MapNode;
 import dsw.gerumap.app.maprepository.composite.MapNodeComposite;
+import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.implementation.Project;
 
 import javax.swing.event.TreeSelectionEvent;

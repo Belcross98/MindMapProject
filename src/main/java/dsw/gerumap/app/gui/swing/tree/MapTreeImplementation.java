@@ -117,4 +117,6 @@ public class MapTreeImplementation implements MapTree{
         SwingUtilities.updateComponentTreeUI(treeView);
         System.out.println(((MapNodeComposite) parent.getMapNode()).getListOfChildren());
     }
+
+
 }

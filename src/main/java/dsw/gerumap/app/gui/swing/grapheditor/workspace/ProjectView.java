@@ -2,6 +2,7 @@ package dsw.gerumap.app.gui.swing.grapheditor.workspace;
 
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import dsw.gerumap.app.gui.swing.state.StateManager;
+import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.maprepository.composite.MapNode;
 import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.implementation.Project;
@@ -38,6 +39,8 @@ public class ProjectView extends JPanel implements ISubscriber {
     private List<MapView> tabs;
 
     private Settings settings;
+
+    private  MapTreeItem selectedMapTreItem;
 
    public ProjectView(){
 
@@ -85,6 +88,7 @@ public class ProjectView extends JPanel implements ISubscriber {
    }
 
     public void refreshWorkspace(MapNode selectedProject){
+
 
         tabs.clear();
         tabbedPane.removeAll();
