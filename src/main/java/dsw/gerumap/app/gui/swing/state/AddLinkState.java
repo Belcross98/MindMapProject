@@ -1,11 +1,13 @@
 package dsw.gerumap.app.gui.swing.state;
 
+import dsw.gerumap.app.core.messagegen.EventType;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
+import dsw.gerumap.app.gui.swing.view.MainFrame;
 
 
 import java.awt.*;
@@ -32,8 +34,11 @@ public class AddLinkState extends  State{
             }
 
         }
-        if(link.getFrom() == null)
-           return;
+        if(link.getFrom() == null){
+            MainFrame.getInstance().getMessageGenerator().messageGenerate(EventType.YOU_DONT_HAVE_INITIAL_POINT);
+            return;
+        }
+
         //hande this with message generator
 
         linkPainter = new LinkPainter(link);

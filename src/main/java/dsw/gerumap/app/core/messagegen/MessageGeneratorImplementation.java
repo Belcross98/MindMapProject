@@ -35,6 +35,9 @@ public class MessageGeneratorImplementation implements MessageGenerator, IPublis
         if(type == EventType.NO_ELEMENT_FOUND){
             msg = new Message("No element found", MessageType.WARNING, LocalDateTime.now());
         }
+        if(type == EventType.YOU_DONT_HAVE_INITIAL_POINT){
+            msg = new Message("You dont have start piont!", MessageType.WARNING, LocalDateTime.now());
+        }
         notifySubscribers(msg);
         return msg;
     }
