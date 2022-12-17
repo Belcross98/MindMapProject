@@ -32,7 +32,6 @@ public class SaveAction implements ActionListener {
             painter.getElement().setName(name);
 
         }
-        MainFrame.getInstance().getProjectView().getMapView().repaint();
         MainFrame.getInstance().getProjectView().getSettings().getJTextField().setText("");
         MainFrame.getInstance().getProjectView().getSettings().getJTextField2().setText("");
         MainFrame.getInstance().getProjectView().getSettings().setVisible(false);

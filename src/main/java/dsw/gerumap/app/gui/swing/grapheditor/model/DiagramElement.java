@@ -1,6 +1,7 @@
 package dsw.gerumap.app.gui.swing.grapheditor.model;
 
 import dsw.gerumap.app.maprepository.implementation.Element;
+import dsw.gerumap.app.maprepository.observer.IPublisher;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.awt.*;
 @Getter
 @Setter
 
-public class DiagramElement extends Element {
+public class DiagramElement extends Element implements IPublisher {
 
     int width;
     Color color;
@@ -25,4 +26,8 @@ public class DiagramElement extends Element {
 
     }
 
+    public void setColor(Color color) {
+        notifySubscribers(this);
+        this.color = color;
+    }
 }
