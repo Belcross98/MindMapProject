@@ -1,13 +1,12 @@
 package dsw.gerumap.app.gui.swing.state;
 
-import com.sun.jdi.request.InvalidRequestStateException;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,11 +15,8 @@ public class SelectState extends State{
 
     private HashMap<ElementPainter,Color> restoreColor = new HashMap<>();
     private Title first = null;
-    private Title second = null;
-    private Title third = null;
-    private Point position;
+    private Point2D position;
     private TitlePainter titlePainter = null;
-
 
     @Override
     public void mousePressed(Point pos, MapView mapView) {
@@ -36,6 +32,8 @@ public class SelectState extends State{
         restoreColor.clear();
         for(ElementPainter p:mapView.getPainters()){
 
+
+
             if(p.elementAt(pos)){
 
                 if(!(restoreColor.containsKey(p))){
@@ -46,6 +44,7 @@ public class SelectState extends State{
 
                 p.getElement().setCurrentColor(Color.BLUE);
                 p.getElement().setSelected(true);
+
 
             }
 
@@ -59,24 +58,24 @@ public class SelectState extends State{
         int width = 0;
         int height = 0;
 
-
         if(first == null){
             first = new Title(5,Color.BLACK, "", new Dimension(30, 15), pos, "");
-            position = pos;
-            second = first;
+            position = new Point2D.Double(pos.getX(),pos.getY());
         }
 
-        width = (int)  second.getSize().getWidth();
-        height = (int) second.getSize().getHeight();
+        if(titlePainter == null)
+            titlePainter = new TitlePainter(first);
+        if(titlePainter.getElement().getSubscribers()!=null)
+            titlePainter.getElement().removeSubscriber(mapView);
+        titlePainter.getElement().addSubscriber(mapView);
+        width = (int)  first.getSize().getWidth();
+        height = (int) first.getSize().getHeight();
         mapView.removePainter(titlePainter);
-        Dimension newDimension = new Dimension(width + (pos.x - position.x)/100, height + (pos.y - position.y/2)/100 );
-
-
-        third = new Title( 5,Color.BLACK, "",newDimension, position, "");
-        titlePainter = new TitlePainter(third);
+        Dimension newDimension = new Dimension((int) (width + (pos.x - position.getX())/100), (int) (height + (pos.y - position.getY()/2)/100));
+        first.setSize(newDimension);
+        titlePainter.setElement(first);
         mapView.addPainter(titlePainter);
-        second = third;
-        mapView.repaint();
+
 
 
     }
@@ -102,7 +101,7 @@ public class SelectState extends State{
             Title title = (Title) painter.getElement();
 
 
-            if(titlePainter.getShape().intersects(title.getPosition().x,title.getPosition().y,title.getSize().width,title.getSize().height)){
+            if(titlePainter.getShape().intersects(title.getPosition().getX(),title.getPosition().getY(),title.getSize().width,title.getSize().height)){
                 if(!(restoreColor.containsKey(painter))){
 
                     restoreColor.put(painter,painter.getElement().getColor());
@@ -117,9 +116,10 @@ public class SelectState extends State{
         }
 
         mapView.removePainter(titlePainter);
+        ((Title)titlePainter.getElement()).setSize(null);
+        titlePainter.getElement().removeSubscriber(mapView);
         titlePainter = null;
         first = null;
-        mapView.repaint();
     }
 
 

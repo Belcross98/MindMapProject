@@ -28,18 +28,14 @@ public class TitlePainter extends ElementPainter {
         Graphics2D g2 = (Graphics2D) g;
 
         int stringWidth = g2.getFontMetrics().stringWidth(element.getName());
-
         g2.setPaint(element.getCurrentColor());
-
         g2.setStroke(new BasicStroke(element.getWidth()));
-        System.out.println("++++++++++++++++++++++++++++++++++++" + shape);
 
 
         if (element instanceof Title){
             Title  title = (Title) element;
-            //title.setSize(new Dimension(10 +stringWidth * 4, title.getSize().height));
             String name = title.getName();
-            shape = new Ellipse2D.Float(title.getPosition().x,title.getPosition().y,title.getSize().width,title.getSize().height);
+            shape = new Ellipse2D.Float((float) title.getPosition().getX(), (float) title.getPosition().getY(), (float) title.getSize().width, (float) title.getSize().height);
             title.setShape(shape);
             g2.draw(shape);
             g2.drawString(name, (int)(title.getPosition().getX() + shape.getBounds().getWidth() / 2 - stringWidth / 2),

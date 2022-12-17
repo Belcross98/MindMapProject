@@ -24,7 +24,6 @@ public class AddTittleState extends State{
         mapView.getMindMap().addChild(title);
         title.addSubscriber(mapView);
         MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
-        String nodeName = MainFrame.getInstance().getProjectView().getTabbedPane().getSelectedComponent().getName();
         MainFrame.getInstance().getMapTree().addChild(selected);
 
     }

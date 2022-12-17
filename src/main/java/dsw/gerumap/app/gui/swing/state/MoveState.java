@@ -8,6 +8,7 @@ import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class MoveState extends State{
 
@@ -29,7 +30,6 @@ public class MoveState extends State{
             if(painter.elementAt(pos)){
 
                 originalPosition = pos;
-                temp = title;
                 break;
             }
 
