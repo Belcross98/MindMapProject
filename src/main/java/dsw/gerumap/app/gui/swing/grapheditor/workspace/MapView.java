@@ -26,10 +26,9 @@ public class MapView extends JPanel implements ISubscriber {
 
     private double  zoomFactor = 1;
 
-    ScrollPane scrollPane;
+
     AffineTransform affineTransform = new AffineTransform();
 
-    JScrollPane jScrollPane;
     private double xTranslate = 0;
     private double yTranslate = 0;
 
@@ -41,10 +40,7 @@ public class MapView extends JPanel implements ISubscriber {
         painters = new ArrayList<>();
         selectedPainters = new ArrayList<>();
         this.mindMap = mindMap;
-        this.scrollPane = new ScrollPane();
-
         mindMap.addSubscriber(this);
-
     }
 
     public void addPainter(ElementPainter painter){

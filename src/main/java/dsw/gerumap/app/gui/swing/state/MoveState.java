@@ -45,12 +45,12 @@ public class MoveState extends State{
             return;
 
 
-        if(temp == null){
-            ProjectView projectView = MainFrame.getInstance().getProjectView();
-            MapView currMapView = (MapView) projectView.getTabbedPane().getSelectedComponent();
-            currMapView.pan(pos.getX() - originalPosition.getX(), pos.getY() - originalPosition.getY());
-            return;
-        }
+//        if(temp == null){
+//            ProjectView projectView = MainFrame.getInstance().getProjectView();
+//            MapView currMapView = (MapView) projectView.getTabbedPane().getSelectedComponent();
+//            currMapView.pan(pos.getX() - originalPosition.getX(), pos.getY() - originalPosition.getY());
+//            return;
+//        }
 
         System.out.println(mapView.getSelectedPainters().size()+"Broj selektovanih");
 
