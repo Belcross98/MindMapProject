@@ -1,6 +1,6 @@
 # gerumap-tim_teodorjakovljevic_katarinaracic
-gerumap-tim_teodorjakovljevic_katarinaracic created by GitHub Classroom
-Teodor Jakovljevic 96/22 RN
+gerumap-tim_aleksandarmitkovic_katarinaracic created by GitHub Classroom
+Aleksandar Mitkovic 50/17 RN
 Katarina Racic 98/22 RN
 
 
