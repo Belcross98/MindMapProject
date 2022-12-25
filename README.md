@@ -1,4 +1,4 @@
-# gerumap-tim_teodorjakovljevic_katarinaracic
+# gerumap-tim_aleksandarmitkovic_katarinaracic
 gerumap-tim_aleksandarmitkovic_katarinaracic created by GitHub Classroom
 Aleksandar Mitkovic 50/17 RN
 Katarina Racic 98/22 RN
