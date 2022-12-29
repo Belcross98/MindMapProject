@@ -4,6 +4,8 @@ import dsw.gerumap.app.AppCore;
 import dsw.gerumap.app.core.ApplicationFramework;
 import dsw.gerumap.app.core.MapRepository;
 import dsw.gerumap.app.core.messagegen.EventType;
+import dsw.gerumap.app.gui.swing.command.AbstractCommand;
+import dsw.gerumap.app.gui.swing.command.implementation.AddChildCommand;
 import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.tree.view.MapTreeView;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
@@ -35,6 +37,11 @@ public class MapTreeImplementation implements MapTree{
         treeModel = new DefaultTreeModel(mapTreeItem);
         this.treeView = new MapTreeView(treeModel);
 
+    }
+
+    @Override
+    public MapTreeView getTree() {
+        return treeView;
     }
 
     public MapTreeView generateTree(ProjectExplorer projectExplorer) {
@@ -124,16 +131,18 @@ public class MapTreeImplementation implements MapTree{
         }
 
 
+
+
         MapNode child = createChild((MapNodeComposite)parent.getMapNode());
-        parent.add(new MapTreeItem(child));
-        System.out.println(child.getName());
-        ((MapNodeComposite) parent.getMapNode()).addChild(child);
+        AbstractCommand command = new AddChildCommand(parent, new MapTreeItem(child));
         child.setParent(((MapNodeComposite) parent.getMapNode()));
         System.out.println(((MapNodeComposite) parent.getMapNode()).getListOfChildren());
+        ApplicationFramework.getInstance().getGui().getCommandManager().addCommand(command);
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
         System.out.println(((MapNodeComposite) parent.getMapNode()).getListOfChildren());
     }
+
 
 
 

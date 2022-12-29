@@ -9,6 +9,8 @@ import dsw.gerumap.app.maprepository.implementation.ProjectExplorer;
 
 public interface MapTree {
 
+    MapTreeView getTree();
+
     MapTreeView generateTree(ProjectExplorer projectExplorer);
     void addChild(MapTreeItem parent);
     MapTreeItem getSelectedNode();
