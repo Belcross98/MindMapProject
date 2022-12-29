@@ -8,6 +8,9 @@ import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
+import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
+import dsw.gerumap.app.gui.swing.view.MainFrame;
+import dsw.gerumap.app.maprepository.composite.MapNode;
 import dsw.gerumap.app.maprepository.observer.ISubscriber;
 
 import java.awt.*;
@@ -16,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeleteState extends State{
+
 
     @Override
     public void mousePressed(Point pos, MapView mapView) {
@@ -38,6 +42,10 @@ public class DeleteState extends State{
                 ((Title)((Link)p.getElement()).getFrom()).removeLink((LinkPainter) p);
                 ((Title)((Link)p.getElement()).getTo()).removeLink((LinkPainter) p);
                 mapView.getPainters().remove(p);
+                mapView.getMindMap().removeChild(p.getElement());
+                deleteFromTree(p.getElement());
+
+
 
             }
 
@@ -47,6 +55,8 @@ public class DeleteState extends State{
                 Title title = (Title) p.getElement();
                 mapView.removePainter(p);
                 mapView.getMindMap().removeChild(p.getElement());
+                MapTreeItem toDelete = MainFrame.getInstance().getMapTree().getNode(p.getElement());
+                MainFrame.getInstance().getMapTree().removeChild(toDelete);
 
                 if(!(title.getLinks().isEmpty())){
 
@@ -55,6 +65,7 @@ public class DeleteState extends State{
                     for(LinkPainter linkPainter:title.getLinks()) {
 
                         mapView.getPainters().remove(linkPainter);
+                        deleteFromTree(linkPainter.getElement());
                         linked.put( ((Title) ((Link)linkPainter.getElement()).getFrom()),linkPainter);
                         linked.put( ((Title) ((Link)linkPainter.getElement()).getTo()),linkPainter);
 
@@ -84,5 +95,10 @@ public class DeleteState extends State{
     @Override
     public void mouseReleased(Point pos, MapView mapView) {
         //Nista
+    }
+
+    public void deleteFromTree(MapNode del){
+        MapTreeItem toDelete = MainFrame.getInstance().getMapTree().getNode(del);
+        MainFrame.getInstance().getMapTree().removeChild(toDelete);
     }
 }

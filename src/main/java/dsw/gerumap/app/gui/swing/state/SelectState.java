@@ -1,9 +1,10 @@
 package dsw.gerumap.app.gui.swing.state;
 
+import dsw.gerumap.app.gui.swing.grapheditor.model.SelectCircle;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
-import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.SelectCirclePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -14,9 +15,11 @@ import java.util.Map;
 public class SelectState extends State{
 
     private HashMap<ElementPainter,Color> restoreColor = new HashMap<>();
-    private Title first = null;
+    //private Title first = null;
+    private SelectCircle first = null;
     private Point2D position;
-    private TitlePainter titlePainter = null;
+    //private TitlePainter titlePainter = null;
+    private SelectCirclePainter selectCirclePainter = null;
 
     @Override
     public void mousePressed(Point pos, MapView mapView) {
@@ -45,7 +48,6 @@ public class SelectState extends State{
                 p.getElement().setCurrentColor(Color.BLUE);
                 p.getElement().setSelected(true);
 
-
             }
 
         }
@@ -55,26 +57,27 @@ public class SelectState extends State{
     @Override
     public void mouseDragged(Point pos, MapView mapView) {
 
+
         int width = 0;
         int height = 0;
 
         if(first == null){
-            first = new Title(5,Color.BLACK, "", new Dimension(30, 15), pos, "");
+            first = new SelectCircle(5,Color.BLACK,"",new Dimension(1,1),pos);
             position = new Point2D.Double(pos.getX(),pos.getY());
         }
 
-        if(titlePainter == null)
-            titlePainter = new TitlePainter(first);
-        if(titlePainter.getElement().getSubscribers()!=null)
-            titlePainter.getElement().removeSubscriber(mapView);
-        titlePainter.getElement().addSubscriber(mapView);
+        if(selectCirclePainter == null)
+            selectCirclePainter = new SelectCirclePainter(first);
+        if(selectCirclePainter.getElement().getSubscribers()!=null)
+            selectCirclePainter.getElement().removeSubscriber(mapView);
+        selectCirclePainter.getElement().addSubscriber(mapView);
         width = (int)  first.getSize().getWidth();
         height = (int) first.getSize().getHeight();
-        mapView.removePainter(titlePainter);
+        mapView.removePainter(selectCirclePainter);
         Dimension newDimension = new Dimension((int) (width + (pos.x - position.getX())/100), (int) (height + (pos.y - position.getY()/2)/100));
         first.setSize(newDimension);
-        titlePainter.setElement(first);
-        mapView.addPainter(titlePainter);
+        selectCirclePainter.setElement(first);
+        mapView.addPainter(selectCirclePainter);
 
 
 
@@ -83,17 +86,18 @@ public class SelectState extends State{
     @Override
     public void mouseReleased(Point pos, MapView mapView) {
 
-        if(titlePainter == null)
+
+        if(selectCirclePainter == null)
             return;
 
         for(ElementPainter painter:mapView.getPainters()){
 
-            if(painter == titlePainter || painter instanceof LinkPainter)
+            if(painter == selectCirclePainter || painter instanceof LinkPainter)
                 continue;
 
-            if(titlePainter.getShape() == null){
+            if(((SelectCircle) selectCirclePainter.getElement()).getShape() == null){
 
-                mapView.removePainter(titlePainter);
+                mapView.removePainter(selectCirclePainter);
                 first = null;
                 return;
             }
@@ -101,12 +105,12 @@ public class SelectState extends State{
             Title title = (Title) painter.getElement();
 
 
-            if(titlePainter.getShape().intersects(title.getPosition().getX(),title.getPosition().getY(),title.getSize().width,title.getSize().height)){
+            if(((SelectCircle) selectCirclePainter.getElement()).getShape().intersects(title.getPosition().getX(),title.getPosition().getY(),title.getSize().width,title.getSize().height)){
                 if(!(restoreColor.containsKey(painter))){
 
                     restoreColor.put(painter,painter.getElement().getColor());
                     mapView.getSelectedPainters().add(painter);
-                    }
+                }
                 painter.getElement().setCurrentColor(Color.BLUE);
                 painter.getElement().setSelected(true);
 
@@ -115,10 +119,10 @@ public class SelectState extends State{
 
         }
 
-        mapView.removePainter(titlePainter);
-        ((Title)titlePainter.getElement()).setSize(null);
-        titlePainter.getElement().removeSubscriber(mapView);
-        titlePainter = null;
+        mapView.removePainter(selectCirclePainter);
+        ((SelectCircle) selectCirclePainter.getElement()).setSize(null);
+        selectCirclePainter.getElement().removeSubscriber(mapView);
+        selectCirclePainter = null;
         first = null;
     }
 

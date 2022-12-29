@@ -35,6 +35,10 @@ public class ActionMenager {
 
     private ZoomOutAction zoomOutAction;
 
+    private RedoAction redoAction;
+
+    private UndoAction undoAction;
+
 
     public ActionMenager(){
         initialiseActions();
@@ -54,6 +58,8 @@ public class ActionMenager {
         moveAction = new MoveAction();
         zoomInAction = new ZoomInAction();
         zoomOutAction = new ZoomOutAction();
+        undoAction = new UndoAction();
+        redoAction = new RedoAction();
     }
 
 
