@@ -16,7 +16,7 @@ public class AddTittleState extends State{
 
     @Override
     public void mousePressed(Point pos, MapView mapView) {
-        String name = "Title";//JOptionPane.showInputDialog(MainFrame.getInstance(), "Enter your tiitle");
+        String name = "Title";
         if(name == null || name.isEmpty())
             return;
         Title title = new Title(5,Color.BLACK, name, new Dimension(120, 60), pos, name);
@@ -24,8 +24,10 @@ public class AddTittleState extends State{
         mapView.addPainter(titlePainter);
         mapView.getMindMap().addChild(title);
         title.addSubscriber(mapView);
+        //error handler ( selectovani node mora da bude mind map )
         MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
-        MainFrame.getInstance().getMapTree().addChild(selected);
+        MainFrame.getInstance().getMapTree().addElement(selected,title);
+
 
     }
 

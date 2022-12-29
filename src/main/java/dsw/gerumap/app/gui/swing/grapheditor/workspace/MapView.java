@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class MapView extends JPanel implements ISubscriber {
         affineTransform.setToIdentity();
         affineTransform.translate(xTranslate, yTranslate);
         affineTransform.scale(zoomFactor, zoomFactor);
+
         repaint();
     }
 

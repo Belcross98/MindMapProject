@@ -7,6 +7,7 @@ import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
+import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 
 
@@ -111,6 +112,10 @@ public class AddLinkState extends  State{
         ((Title) link.getTo()).addLink(linkPainter);
         mapView.addPainter(linkPainter);
         link.addSubscriber(mapView);
+
+        //isto kao kod addTitle error handler
+        MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
+        MainFrame.getInstance().getMapTree().addElement(selected,link);
 
 
 
