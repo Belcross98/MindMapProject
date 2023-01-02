@@ -1,6 +1,8 @@
 package dsw.gerumap.app.gui.swing.state;
 
+import dsw.gerumap.app.core.ApplicationFramework;
 import dsw.gerumap.app.core.messagegen.EventType;
+import dsw.gerumap.app.gui.swing.command.AbstractCommand;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
@@ -9,6 +11,8 @@ import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
+import dsw.gerumap.app.maprepository.commands.AddLinkCommand;
+import dsw.gerumap.app.maprepository.commands.AddTitleCommand;
 
 
 import java.awt.*;
@@ -66,57 +70,8 @@ public class AddLinkState extends  State{
     @Override
     public void mouseReleased(Point pos, MapView mapView) {
 
-        if(link.getFrom() == null)
-            return;
-
-        for(ElementPainter painter: mapView.getPainters()){
-
-            if(painter.elementAt(pos) && painter.getElement()!= link.getFrom() && painter instanceof TitlePainter){
-
-                mapView.removePainter(linkPainter);
-                link.setTo(painter.getElement());
-                break;
-            }
-
-        }
-
-        if(link.getTo() == null){
-
-            mapView.getPainters().remove(linkPainter);
-            return;
-        }
-
-
-        Title from = (Title) link.getFrom();
-        Title to = (Title) link.getTo();
-
-        Point2D a = from.getPosition();
-        Point2D b = to.getPosition();
-
-        int xFOffset = (int) (from.getSize().getWidth()/2);
-        int yFOffset = (int) (from.getSize().getHeight()/2);
-        int xTOffset = (int) (to.getSize().getWidth()/2);
-        int yTOffset = (int) (to.getSize().getHeight()/2);
-
-        Point2D c = new Point((int) (a.getX()+xFOffset), (int) (a.getY()+yFOffset));
-        Point2D d = new Point((int) (b.getX()+xTOffset), (int) (b.getY()+yTOffset));
-
-
-        link.setFromPoint(c);
-        link.setToPoint(d);
-
-
-
-        linkPainter.setElement(link);
-        ((Title) link.getFrom()).addLink(linkPainter);
-        ((Title) link.getTo()).addLink(linkPainter);
-        mapView.addPainter(linkPainter);
-        link.addSubscriber(mapView);
-
-        //isto kao kod addTitle error handler
-        MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
-        MainFrame.getInstance().getMapTree().addElement(selected,link);
-
+        AbstractCommand abstractCommand = new AddLinkCommand(linkPainter,  pos, link, (Title) link.getFrom());
+        ApplicationFramework.getInstance().getGui().getCommandManager().addCommand(abstractCommand);
 
 
     }

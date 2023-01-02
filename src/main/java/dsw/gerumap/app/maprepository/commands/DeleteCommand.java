@@ -32,13 +32,15 @@ public class DeleteCommand extends AbstractCommand {
 
     @Override
     public void doCommand() {
+
         MapView mapView = MainFrame.getInstance().getProjectView().getMapView();
         ElementPainter painter = mapView.elementPainter(position);
-        currentObject = painter.getElement();
+
         if(painter == null){
             AppCore.getInstance().getMessageGenerator().messageGenerate(EventType.NO_ELEMENT_FOUND);
             return;
         }
+        currentObject = painter.getElement();
 
         for(ElementPainter p : mapView.getSelectedPainters()){
 
@@ -112,6 +114,8 @@ public class DeleteCommand extends AbstractCommand {
 
         MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
         MainFrame.getInstance().getMapTree().addElement(selected,currentObject);
+
+
 
     }
 

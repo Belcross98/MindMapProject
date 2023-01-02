@@ -1,5 +1,7 @@
 package dsw.gerumap.app.gui.swing.state;
 
+import dsw.gerumap.app.core.ApplicationFramework;
+import dsw.gerumap.app.gui.swing.command.AbstractCommand;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
@@ -8,6 +10,8 @@ import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.ProjectView;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
+import dsw.gerumap.app.maprepository.commands.AddLinkCommand;
+import dsw.gerumap.app.maprepository.commands.MoveCommand;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -118,7 +122,11 @@ public class MoveState extends State{
     @Override
     public void mouseReleased(Point pos, MapView mapView) {
 
+        AbstractCommand abstractCommand = new MoveCommand(originalPosition, pos, mapView.getSelectedPainters());
+        ApplicationFramework.getInstance().getGui().getCommandManager().addCommand(abstractCommand);
+
         originalPosition = null;
         temp = null;
+
     }
 }
