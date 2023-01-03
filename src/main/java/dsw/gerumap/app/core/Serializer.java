@@ -1,4 +1,4 @@
-package dsw.gerumap.app.core.messagegen;
+package dsw.gerumap.app.core;
 
 import dsw.gerumap.app.maprepository.implementation.Project;
 

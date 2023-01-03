@@ -10,6 +10,7 @@ public class ApplicationFramework {
 
     protected Gui gui;
     protected MapRepository mapRepository;
+    protected Serializer serializer;
 
 
     public MapRepository getMapRepository() {
@@ -21,9 +22,10 @@ public class ApplicationFramework {
     }
 
 
-    public void initialise(Gui gui, MapRepository mapRepository){
+    public void initialise(Gui gui, MapRepository mapRepository,Serializer serializer){
         this.gui = gui;
         this.mapRepository=mapRepository;
+        this.serializer = serializer;
     }
 
     public void setGui(Gui gui) {

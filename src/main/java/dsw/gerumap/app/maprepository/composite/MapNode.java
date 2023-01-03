@@ -2,11 +2,13 @@ package dsw.gerumap.app.maprepository.composite;
 
 
 import lombok.*;
+
+
 @Getter
 
 
 
-public abstract class MapNode {
+public abstract class MapNode  {
     private String name;
 
     private MapNode parent;

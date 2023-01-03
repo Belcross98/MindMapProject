@@ -41,6 +41,10 @@ public class ActionMenager {
 
     private SaveAsPictureAction saveAsPictureAction;
 
+    private SaveAction saveAction;
+
+    private OpenAction openAction;
+
 
     public ActionMenager(){
         initialiseActions();
@@ -63,6 +67,8 @@ public class ActionMenager {
         undoAction = new UndoAction();
         redoAction = new RedoAction();
         saveAsPictureAction = new SaveAsPictureAction();
+        saveAction = new SaveAction();
+        openAction = new OpenAction();
     }
 
 

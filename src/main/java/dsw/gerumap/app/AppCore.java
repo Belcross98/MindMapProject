@@ -1,9 +1,6 @@
 package dsw.gerumap.app;
 
-import dsw.gerumap.app.core.ApplicationFramework;
-import dsw.gerumap.app.core.Gui;
-import dsw.gerumap.app.core.MapRepository;
-import dsw.gerumap.app.core.MessageGenerator;
+import dsw.gerumap.app.core.*;
 import dsw.gerumap.app.core.messagegen.EventType;
 import dsw.gerumap.app.core.messagegen.Message;
 import dsw.gerumap.app.core.messagegen.MessageGeneratorImplementation;
@@ -12,6 +9,7 @@ import dsw.gerumap.app.errorlogger.FileLogger;
 import dsw.gerumap.app.gui.swing.SwingGui;
 import dsw.gerumap.app.maprepository.MapRepositoryImplemetation;
 import dsw.gerumap.app.maprepository.observer.ISubscriber;
+import dsw.gerumap.app.serializer.GsonSerializer;
 
 
 public class AppCore extends ApplicationFramework {
@@ -44,7 +42,8 @@ public class AppCore extends ApplicationFramework {
         Gui gui = new SwingGui();
         ApplicationFramework appCore = ApplicationFramework.getInstance();
         MapRepository mapRepository = new MapRepositoryImplemetation();
-        appCore.initialise(gui,mapRepository);
+        Serializer serializer = new GsonSerializer();
+        appCore.initialise(gui,mapRepository,serializer);
         appCore.run();
         ((SwingGui)gui).initialise(getInstance().messageGenerator);
         consoleLogger.initialise(instance.messageGenerator);
