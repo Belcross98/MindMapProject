@@ -15,6 +15,10 @@ import java.util.List;
 
 public class Project extends MapNodeComposite implements IPublisher {
 
+    protected String filePath;
+
+    protected boolean changed = true;
+
     private String author;
 
     private List<ISubscriber> subscribers;
@@ -26,6 +30,7 @@ public class Project extends MapNodeComposite implements IPublisher {
     @Override
     public void setName(String name){
         super.setName(name);
+        changed = true;
         notifySubscribers(this);
     }
 

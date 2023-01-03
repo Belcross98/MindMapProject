@@ -39,6 +39,8 @@ public class ActionMenager {
 
     private UndoAction undoAction;
 
+    private SaveAsPictureAction saveAsPictureAction;
+
 
     public ActionMenager(){
         initialiseActions();
@@ -60,6 +62,7 @@ public class ActionMenager {
         zoomOutAction = new ZoomOutAction();
         undoAction = new UndoAction();
         redoAction = new RedoAction();
+        saveAsPictureAction = new SaveAsPictureAction();
     }
 
 
