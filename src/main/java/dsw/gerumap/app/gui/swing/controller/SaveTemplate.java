@@ -32,7 +32,7 @@ public class SaveTemplate extends AbstractGerumapAction{
             return;
         }
 
-        JFileChooser jfc = new JFileChooser();
+        JFileChooser jfc = new JFileChooser("src/main/resources/templates");
 
         if (!(MainFrame.getInstance().getMapTree().getSelectedNode().getMapNode() instanceof MindMap)) {
             MainFrame.getInstance().getMessageGenerator().messageGenerate(EventType.YOU_HAVE_TO_SELECT_MINDMAP);
