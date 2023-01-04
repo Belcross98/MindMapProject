@@ -1,7 +1,9 @@
 package dsw.gerumap.app.gui.swing.grapheditor.workspace;
 
 import dsw.gerumap.app.gui.swing.grapheditor.controller.MouseController;
+import dsw.gerumap.app.gui.swing.grapheditor.model.DiagramElement;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
+import dsw.gerumap.app.gui.swing.view.MainFrame;
 import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.observer.ISubscriber;
 import lombok.Getter;
@@ -48,6 +50,18 @@ public class MapView extends JPanel implements ISubscriber {
         painters.add(painter);
     }
 
+    public ElementPainter getPainterFor(DiagramElement elem) {
+
+        for (ElementPainter ptr : painters) {
+
+            if (ptr.getElement() == elem) {
+                System.out.println("I FOUND YOUUUUUUUUUUUUUUU");
+                return ptr;
+            }
+        }
+
+        return null;
+    }
 
     public void removePainter(ElementPainter painter){
         painters.remove(painter);
@@ -61,7 +75,7 @@ public class MapView extends JPanel implements ISubscriber {
         repaint();
     }
 
-    public ElementPainter elementPainter(Point pos){
+    public ElementPainter elementPainter(Point2D pos){
         for(ElementPainter painter : painters){
             if(painter.elementAt(pos)){
                 return painter;
@@ -93,6 +107,7 @@ public class MapView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notification) {
+        MainFrame.getInstance().getProjectView().getProject().setChanged(true);
         repaint();
     }
 

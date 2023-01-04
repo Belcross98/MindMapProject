@@ -10,7 +10,7 @@ import java.awt.*;
 @Getter
 @Setter
 
-public class DiagramElement extends Element implements IPublisher {
+public abstract class DiagramElement extends Element implements IPublisher {
 
     int width;
     Color color;
@@ -29,5 +29,9 @@ public class DiagramElement extends Element implements IPublisher {
     public void setColor(Color color) {
         notifySubscribers(this);
         this.color = color;
+    }
+
+    public void setCurrentColor(Color currentColor) {
+        this.currentColor = currentColor;
     }
 }

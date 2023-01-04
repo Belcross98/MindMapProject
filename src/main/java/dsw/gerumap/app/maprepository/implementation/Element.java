@@ -12,10 +12,9 @@ import java.util.List;
 @Getter
 @Setter
 
-public class Element extends MapNode implements IPublisher {
+public abstract class Element extends MapNode {
 
     private boolean selected;
-    private List<ISubscriber> subscribers;
 
     public Element(String name, MapNode parent) {
         super(name, parent);
@@ -31,42 +30,7 @@ public class Element extends MapNode implements IPublisher {
         notifySubscribers(this);
    }
 
-    @Override
-    public void addSubscriber(ISubscriber subscriber) {
 
-        if(subscriber == null){
-            return;
-        }
-        if(this.subscribers== null){
-            subscribers = new ArrayList<>();
-        }
-        if(this.subscribers.contains(subscriber)){
-            return;
-        }
 
-        this.subscribers.add(subscriber);
     }
 
-    @Override
-    public void removeSubscriber(ISubscriber subscriber) {
-
-
-        if(subscriber == null || this.subscribers.contains(subscriber)){
-            return;
-        }
-        this.subscribers.remove(subscriber);
-    }
-
-    @Override
-    public void notifySubscribers(Object notification) {
-        {
-            if (notification == null || this.subscribers == null || this.subscribers.isEmpty()){
-                return;
-            }
-            for(ISubscriber subscriber: subscribers){
-                subscriber.update(notification);
-            }
-        }
-
-    }
-}

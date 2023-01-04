@@ -51,8 +51,8 @@ public class DeleteCommand extends AbstractCommand {
             if(p instanceof LinkPainter){
 
 
-                ((Title)((Link)p.getElement()).getFrom()).removeLink((LinkPainter) p);
-                ((Title)((Link)p.getElement()).getTo()).removeLink((LinkPainter) p);
+                ((Title)((Link)p.getElement()).getFrom()).removeLink((Link) p.getElement());
+                ((Title)((Link)p.getElement()).getTo()).removeLink((Link) p.getElement());
                 mapView.getPainters().remove(p);
                 mapView.getMindMap().removeChild(p.getElement());
                 deleteFromTree(p.getElement());
@@ -74,8 +74,9 @@ public class DeleteCommand extends AbstractCommand {
 
                     HashMap<Title,LinkPainter> linked = new HashMap<>();
 
-                    for(LinkPainter linkPainter:title.getLinks()) {
+                    for(Link link:title.getLinks()) {
 
+                        LinkPainter linkPainter = (LinkPainter) mapView.getPainterFor(link);
                         mapView.getPainters().remove(linkPainter);
                         deleteFromTree(linkPainter.getElement());
                         linked.put( ((Title) ((Link)linkPainter.getElement()).getFrom()),linkPainter);
@@ -86,7 +87,7 @@ public class DeleteCommand extends AbstractCommand {
 
                     for(Map.Entry<Title,LinkPainter> entry: linked.entrySet()){
 
-                        entry.getKey().removeLink(entry.getValue());
+                        entry.getKey().removeLink((Link) entry.getValue().getElement());
 
                     }
                     linked.clear();

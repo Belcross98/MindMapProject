@@ -6,6 +6,11 @@ import dsw.gerumap.app.core.MapRepository;
 import dsw.gerumap.app.core.messagegen.EventType;
 import dsw.gerumap.app.gui.swing.command.AbstractCommand;
 import dsw.gerumap.app.gui.swing.command.implementation.AddChildCommand;
+import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
+import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
+import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.tree.view.MapTreeView;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
@@ -21,7 +26,11 @@ import lombok.Setter;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Random;
 
 
@@ -100,11 +109,62 @@ public class MapTreeImplementation implements MapTree{
 
     @Override
     public void loadProject(Project node) {
+
         MapTreeItem loadedProject = new MapTreeItem(node);
         getRoot().add(loadedProject);
-
+        MainFrame.getInstance().getProjectView().refreshWorkspace(node);
         MapNodeComposite mapNode = (MapNodeComposite) getRoot().getMapNode();
         mapNode.addChild(node);
+        node.setParent(getRoot().getMapNode());
+        node.addSubscriber(MainFrame.getInstance().getProjectView().getMapView());
+
+        for(MapNode nodic: node.getListOfChildren()){
+
+            nodic.setParent(node);
+            nodic.addSubscriber(MainFrame.getInstance().getProjectView().getMapView());
+            MapTreeItem reborNodic = new MapTreeItem(nodic);
+            loadedProject.add(reborNodic);
+
+            for(MapNode childNodic: ((MapNodeComposite) nodic).getListOfChildren()){
+
+
+
+                reborNodic.add(new MapTreeItem(childNodic));
+                childNodic.addSubscriber(MainFrame.getInstance().getProjectView().getMapView());
+                childNodic.setParent(nodic);
+
+            }
+
+
+            for(MapNode childNodic: ((MapNodeComposite) nodic).getListOfChildren()){
+
+                if(childNodic instanceof Title)
+                    ((Title) childNodic).setLinks(new ArrayList<>());
+            }
+
+            for(MapNode childNodic: ((MapNodeComposite)nodic).getListOfChildren()){
+
+
+                if(childNodic instanceof Link){
+
+
+                    ElementPainter fromElement = MainFrame.getInstance().getProjectView().getMapView().elementPainter(((Link) childNodic).getFromPoint());
+                    Title from = (Title) fromElement.getElement();
+                    from.addLink((Link) childNodic);
+                    ElementPainter toElement = MainFrame.getInstance().getProjectView().getMapView().elementPainter(((Link) childNodic).getToPoint());
+                    Title to = (Title) toElement.getElement();
+                    to.addLink((Link) childNodic);
+
+
+                    ((Link) childNodic).setFrom(from);
+                    ((Link) childNodic).setTo(to);
+
+
+                }
+
+            }
+
+        }
 
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);

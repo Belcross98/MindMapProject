@@ -3,6 +3,7 @@ package dsw.gerumap.app.gui.swing.controller;
 
 
 import dsw.gerumap.app.core.ApplicationFramework;
+import dsw.gerumap.app.core.messagegen.EventType;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 import dsw.gerumap.app.maprepository.implementation.Project;
 
@@ -25,7 +26,10 @@ public class SaveAction extends AbstractGerumapAction {
     public void actionPerformed(ActionEvent arg0) {
         JFileChooser jfc = new JFileChooser();
 
-        if (!(MainFrame.getInstance().getMapTree().getSelectedNode().getMapNode() instanceof Project)) return;
+        if (!(MainFrame.getInstance().getMapTree().getSelectedNode().getMapNode() instanceof Project)) {
+            MainFrame.getInstance().getMessageGenerator().messageGenerate(EventType.YOU_HAVE_TO_SELECT_PROJECT);
+            return;
+        }
 
         Project project = (Project) MainFrame.getInstance().getMapTree().getSelectedNode().getMapNode();
         File projectFile = null;

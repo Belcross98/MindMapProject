@@ -13,12 +13,11 @@ import java.awt.geom.Point2D;
 
 public class Link extends DiagramElement implements IPublisher {
 
-    protected DiagramElement from;
-    protected DiagramElement to;
-    protected Point2D fromPoint;
-    protected Point2D toPoint;
+    protected transient DiagramElement from;
+    protected transient DiagramElement to;
+    protected  Point2D fromPoint;
+    protected  Point2D toPoint;
     protected Shape shape;
-    protected String name;
 
     public Link(int width, Color color, String description, DiagramElement from, DiagramElement to,Point2D fromPoint,Point2D toPoint) {
         super(width, color, description);
@@ -26,7 +25,8 @@ public class Link extends DiagramElement implements IPublisher {
         this.to = to;
         this.fromPoint = fromPoint;
         this.toPoint = toPoint;
-        this.name = "Link";
+        this.setName("link");
+        notifySubscribers(this);
 
     }
 

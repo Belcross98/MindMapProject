@@ -1,9 +1,15 @@
 package dsw.gerumap.app.gui.swing.grapheditor.workspace;
 
-import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
+import dsw.gerumap.app.gui.swing.grapheditor.model.DiagramElement;
+import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
+import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.ElementPainter;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.LinkPainter;
+import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
 import dsw.gerumap.app.gui.swing.state.StateManager;
 import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.maprepository.composite.MapNode;
+import dsw.gerumap.app.maprepository.implementation.Element;
 import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.implementation.Project;
 import dsw.gerumap.app.maprepository.observer.ISubscriber;
@@ -106,7 +112,23 @@ public class ProjectView extends JPanel implements ISubscriber {
         for(MapNode child: ((Project) selectedProject).getListOfChildren()) {
             MapView tab = new MapView((MindMap) child);
             tabs.add(tab);
-            System.out.println("111111111111111111111111111111");
+            for(MapNode p: ((MindMap) child).getListOfChildren()){
+
+                if(p instanceof Title) {
+                    p.addSubscriber(tab);
+                    TitlePainter titlePainter = new TitlePainter((Title) p);
+                    titlePainter.setShape(((Title) p).getShape());
+                    tab.addPainter(titlePainter);
+                }
+                if(p instanceof Link){
+                    p.addSubscriber(tab);
+                    LinkPainter linkPainter = new LinkPainter((Link) p);
+                    linkPainter.setShape(((Link) p).getShape());
+                    tab.addPainter(linkPainter);
+
+                }
+
+            }
 
         }
 
@@ -119,6 +141,9 @@ public class ProjectView extends JPanel implements ISubscriber {
 
         @Override
         public void update(Object notification) {
+
+            System.out.println("IM IN HERE AAAAAAAAAAAAAAA");
+            project.setChanged(true);
             if(project == null){
                 return;
             }

@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
 
 @Getter
 @Setter
@@ -45,8 +46,8 @@ public class TitlePainter extends ElementPainter {
     }
 
     @Override
-    public boolean elementAt(Point pos) {
+    public boolean elementAt(Point2D pos) {
         AffineTransform affineTransform = MainFrame.getInstance().getProjectView().getMapView().getAffineTransform();
-        return getShape().contains(pos.x , pos.y);
+        return getShape().contains(pos.getX() , pos.getY());
     }
 }

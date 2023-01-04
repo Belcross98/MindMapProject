@@ -5,6 +5,7 @@ import dsw.gerumap.app.gui.swing.grapheditor.model.SelectCircle;
 
 import java.awt.*;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Point2D;
 
 public class SelectCirclePainter extends ElementPainter{
 
@@ -49,7 +50,7 @@ public class SelectCirclePainter extends ElementPainter{
 
 
     @Override
-    public boolean elementAt(Point pos) {
+    public boolean elementAt(Point2D pos) {
 
         SelectCircle or = (SelectCircle) element;
 

@@ -90,15 +90,18 @@ public class MoveState extends State{
 
                 if(!(temp.getLinks().isEmpty())){
 
-                    for(LinkPainter l : temp.getLinks()){
+                    System.out.println(temp.getLinks().size()+" Aaaaaaaaaaaaa");
+                    System.out.println("Broj Paintera jee" +mapView.getPainters().size());
 
+                    for(Link link : temp.getLinks()){
+
+
+                        LinkPainter l = (LinkPainter) mapView.getPainterFor(link);
                         mapView.getPainters().remove(l);
                         Point2D a = temp.getPosition();
                         int xFOffset = (int) (temp.getSize().getWidth()/2);
                         int yFOffset = (int) (temp.getSize().getHeight()/2);
                         Point2D b = new Point((int) (a.getX()+xFOffset), (int) (a.getY()+yFOffset));
-                        Link link = (Link) l.getElement();
-
                         if(link.getFrom() == temp)
                             link.setFromPoint(b);
                         else

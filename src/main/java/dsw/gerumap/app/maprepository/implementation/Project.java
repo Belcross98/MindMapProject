@@ -13,24 +13,21 @@ import java.util.List;
 @Getter
 @Setter
 
-public class Project extends MapNodeComposite implements IPublisher {
+public class Project extends MapNodeComposite {
 
     protected String filePath;
 
-    protected boolean changed = true;
 
     private String author;
 
-    private List<ISubscriber> subscribers;
 
     public void setAuthor(String name){
         author = name;
         notifySubscribers(this);
     }
-    @Override
-    public void setName(String name){
-        super.setName(name);
-        changed = true;
+    public void setHelloWorld(String helloWorld){
+        super.setName(helloWorld);
+
         notifySubscribers(this);
     }
 
@@ -67,39 +64,4 @@ public class Project extends MapNodeComposite implements IPublisher {
     }
 
 
-    @Override
-    public void addSubscriber(ISubscriber subscriber) {
-        if(subscriber == null){
-            return;
-        }
-        if(this.subscribers== null){
-            subscribers = new ArrayList<>();
-        }
-        if(this.subscribers.contains(subscriber)){
-            return;
-        }
-
-        this.subscribers.add(subscriber);
-
-    }
-
-    @Override
-    public void removeSubscriber(ISubscriber subscriber) {
-        if(subscriber == null || this.subscribers.contains(subscriber)){
-            return;
-        }
-        this.subscribers.remove(subscriber);
-
-    }
-
-    @Override
-    public void notifySubscribers(Object notification) {
-        if (notification == null || this.subscribers == null || this.subscribers.isEmpty()){
-            return;
-        }
-        for(ISubscriber subscriber: subscribers){
-            subscriber.update(notification);
-        }
-
-    }
 }

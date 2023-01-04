@@ -28,6 +28,7 @@ public class OpenAction extends AbstractGerumapAction {
                 Project p = ApplicationFramework.getInstance().getSerializer().loadProject(file);
                 MainFrame.getInstance().getMapTree().loadProject(p);
 
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

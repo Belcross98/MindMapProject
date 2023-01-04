@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 @Getter
 @Setter
@@ -19,5 +20,5 @@ public abstract class ElementPainter {
 
     public abstract void paint(Graphics2D g);
 
-    public abstract boolean elementAt(Point pos);
+    public abstract boolean elementAt(Point2D pos);
 }

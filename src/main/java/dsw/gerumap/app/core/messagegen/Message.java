@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -14,6 +15,8 @@ public class Message {
     private MessageType type;
 
     private LocalDateTime dateAndTime;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");;
+
 
     public Message(String text, MessageType type,  LocalDateTime dateAndTime ) {
         this.text = text;
@@ -22,7 +25,7 @@ public class Message {
     }
 
     public String toString(){
-        return "[" + type + "] +" + "[" + dateAndTime + "]" + " " + text;
+        return "[" + type + "] " + "[" + dateAndTime.format(formatter) + "]" + " " + text;
     }
 
 }

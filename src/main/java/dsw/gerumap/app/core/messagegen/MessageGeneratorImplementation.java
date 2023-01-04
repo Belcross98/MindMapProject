@@ -5,6 +5,7 @@ import dsw.gerumap.app.maprepository.observer.ISubscriber;
 import dsw.gerumap.app.core.MessageGenerator;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,26 +18,33 @@ public class MessageGeneratorImplementation implements MessageGenerator, IPublis
     @Override
     public Message messageGenerate(EventType type) {
 
+
         Message msg = null;
         if (type == EventType.TRY_TO_DELETE_PROJECTEXPLORER) {
             msg = new Message("You can not delete project explorer!", MessageType.ERROR, LocalDateTime.now());
         }
 
-        if(type == EventType.MUST_HAVE_NAME){
+       else if(type == EventType.MUST_HAVE_NAME){
             msg = new Message("You need to enter name!", MessageType.WARNING, LocalDateTime.now());
         }
-        if(type == EventType.NODE_NOT_SELECTED){
+       else if(type == EventType.NODE_NOT_SELECTED){
             msg = new Message("Nothing is selected!", MessageType.WARNING, LocalDateTime.now());
         }
 
-        if (type == EventType.NODE_CANNOT_HAVE_CHILDREN) {
+       else if (type == EventType.NODE_CANNOT_HAVE_CHILDREN) {
             msg = new Message("You can not add node!", MessageType.ERROR, LocalDateTime.now());
         }
-        if(type == EventType.NO_ELEMENT_FOUND){
+       else if(type == EventType.NO_ELEMENT_FOUND){
             msg = new Message("No element found", MessageType.WARNING, LocalDateTime.now());
         }
-        if(type == EventType.YOU_DONT_HAVE_INITIAL_POINT){
-            msg = new Message("You dont have start piont!", MessageType.WARNING, LocalDateTime.now());
+       else if(type == EventType.YOU_DONT_HAVE_INITIAL_POINT){
+            msg = new Message("You dont have start point!", MessageType.WARNING, LocalDateTime.now());
+        }
+       else if(type == EventType.YOU_HAVE_TO_SELECT_PROJECT){
+           msg = new Message("You have to select project first in order to save!",MessageType.WARNING,LocalDateTime.now());
+        }
+       else if(type == EventType.YOU_HAVE_TO_SELECT_MINDMAP) {
+            msg = new Message("You have to select Mind Map first in order to add Elements!", MessageType.WARNING, LocalDateTime.now());
         }
         notifySubscribers(msg);
         return msg;

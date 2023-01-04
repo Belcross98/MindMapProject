@@ -79,8 +79,8 @@ public class AddLinkCommand extends AbstractCommand {
 
 
         linkPainter.setElement(link);
-        ((Title) link.getFrom()).addLink(linkPainter);
-        ((Title) link.getTo()).addLink(linkPainter);
+        ((Title) link.getFrom()).addLink((Link) linkPainter.getElement());
+        ((Title) link.getTo()).addLink((Link) linkPainter.getElement());
         mapView.addPainter(linkPainter);
         link.addSubscriber(mapView);
 

@@ -13,7 +13,7 @@ public class SelectCircle extends DiagramElement implements IPublisher {
 
 
     private Dimension size;
-    private Point2D Position;
+    private transient Point2D Position;
     private Shape shape;
 
     public SelectCircle(int width, Color color, String description, Dimension size, Point2D pos) {

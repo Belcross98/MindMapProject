@@ -13,6 +13,7 @@ import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 import dsw.gerumap.app.maprepository.commands.AddLinkCommand;
 import dsw.gerumap.app.maprepository.commands.AddTitleCommand;
+import dsw.gerumap.app.maprepository.implementation.MindMap;
 
 
 import java.awt.*;
@@ -28,6 +29,14 @@ public class AddLinkState extends  State{
     @Override
     public void mousePressed(Point pos, MapView mapView) {
 
+
+        MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
+        if(!(selected.getMapNode() instanceof MindMap)){
+
+            MainFrame.getInstance().getMessageGenerator().messageGenerate(EventType.YOU_HAVE_TO_SELECT_MINDMAP);
+            return;
+
+        }
 
         link = new Link(5,Color.BLACK,"description",null,null,pos,pos);
 

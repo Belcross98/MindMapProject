@@ -9,7 +9,8 @@ public class ElementFactory implements NodeFactory {
 
     @Override
     public MapNode getNode(String name) {
-        return new Element(name, null);
+        //return new Element(name, null);
+        return null;
     }
 
 

@@ -6,13 +6,13 @@ import dsw.gerumap.app.gui.swing.grapheditor.model.Link;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RectangularShape;
-
+import java.awt.geom.*;
+@Getter
+@Setter
 public class LinkPainter extends ElementPainter {
 
     private int xOffset  = 10;
@@ -20,6 +20,7 @@ public class LinkPainter extends ElementPainter {
 
     private int negativeX = -xOffset;
     private int negativeY = -yOffset;
+    private Shape shape;
 
     public LinkPainter(DiagramElement element) {
         super(element);
@@ -34,8 +35,7 @@ public class LinkPainter extends ElementPainter {
         g2.setPaint(element.getCurrentColor());
         g2.setStroke(new BasicStroke(element.getWidth()));
         Link link = (Link) element;
-
-        Shape shape=new GeneralPath();
+        shape=new GeneralPath();
 
         if(link.getToPoint().getY() > link.getFromPoint().getY())
             yOffset = negativeY;
@@ -67,7 +67,7 @@ public class LinkPainter extends ElementPainter {
 
 
     @Override
-    public boolean elementAt(Point pos) {
+    public boolean elementAt(Point2D pos) {
 
         Link link = (Link) element;
         AffineTransform affineTransform = MainFrame.getInstance().getProjectView().getMapView().getAffineTransform();

@@ -1,5 +1,6 @@
 package dsw.gerumap.app.maprepository.composite;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,8 @@ import java.util.List;
 @Setter
 
 public abstract class MapNodeComposite extends MapNode{
+
+
     protected List<MapNode> listOfChildren;
 
     public MapNodeComposite(String name, MapNode parent) {

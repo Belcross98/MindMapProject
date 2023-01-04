@@ -1,5 +1,6 @@
 package dsw.gerumap.app.maprepository.commands;
 
+import dsw.gerumap.app.core.messagegen.EventType;
 import dsw.gerumap.app.gui.swing.command.AbstractCommand;
 import dsw.gerumap.app.gui.swing.grapheditor.model.Title;
 import dsw.gerumap.app.gui.swing.grapheditor.painters.TitlePainter;
@@ -7,6 +8,7 @@ import dsw.gerumap.app.gui.swing.grapheditor.workspace.MapView;
 import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.view.MainFrame;
 import dsw.gerumap.app.maprepository.composite.MapNode;
+import dsw.gerumap.app.maprepository.implementation.MindMap;
 
 import java.awt.*;
 
@@ -26,6 +28,13 @@ public class AddTitleCommand extends AbstractCommand {
     @Override
     public void doCommand() {
 
+        MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
+        if(!(selected.getMapNode() instanceof MindMap)){
+            MainFrame.getInstance().getMessageGenerator().messageGenerate(EventType.YOU_HAVE_TO_SELECT_MINDMAP);
+            return;
+
+        }
+
         String name = "Title";
         if(name == null || name.isEmpty())
             return;
@@ -36,7 +45,7 @@ public class AddTitleCommand extends AbstractCommand {
         mapView.getMindMap().addChild(title);
         title.addSubscriber(mapView);
         //error handler ( selectovani node mora da bude mind map )
-        MapTreeItem selected = (MapTreeItem) MainFrame.getInstance().getMapTree().getSelectedNode();
+
         MainFrame.getInstance().getMapTree().addElement(selected,title);
     }
 
