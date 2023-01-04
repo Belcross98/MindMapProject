@@ -37,6 +37,8 @@ public class MindMap extends MapNodeComposite {
         }
     }
 
+    private String filePath;
+
     @Override
     public String getChildrenClassName() {
         return "Element";

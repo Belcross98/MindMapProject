@@ -4,6 +4,7 @@ import dsw.gerumap.app.gui.swing.tree.model.MapTreeItem;
 import dsw.gerumap.app.gui.swing.tree.view.MapTreeView;
 import dsw.gerumap.app.maprepository.composite.MapNode;
 import dsw.gerumap.app.maprepository.composite.MapNodeComposite;
+import dsw.gerumap.app.maprepository.implementation.MindMap;
 import dsw.gerumap.app.maprepository.implementation.Project;
 import dsw.gerumap.app.maprepository.implementation.ProjectExplorer;
 
@@ -18,7 +19,8 @@ public interface MapTree {
     void addElement(MapTreeItem parent, MapNode child);
     MapTreeItem getNode(MapNode child);
     MapTreeItem getRoot();
-    void loadProject(Project node);
+    void loadProject(MapNodeComposite node);
+    void loadTemplate(MindMap node);
 
     void removeChild(MapTreeItem parent);
 }

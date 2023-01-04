@@ -108,11 +108,13 @@ public class MapTreeImplementation implements MapTree{
     }
 
     @Override
-    public void loadProject(Project node) {
+    public void loadProject(MapNodeComposite node) {
+
 
         MapTreeItem loadedProject = new MapTreeItem(node);
         getRoot().add(loadedProject);
         MainFrame.getInstance().getProjectView().refreshWorkspace(node);
+
         MapNodeComposite mapNode = (MapNodeComposite) getRoot().getMapNode();
         mapNode.addChild(node);
         node.setParent(getRoot().getMapNode());
@@ -165,6 +167,56 @@ public class MapTreeImplementation implements MapTree{
             }
 
         }
+
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
+    }
+
+    @Override
+    public void loadTemplate(MindMap node) {
+
+        MapTreeItem loadedProject = new MapTreeItem(node);
+        MapTreeItem project = MainFrame.getInstance().getMapTree().getSelectedNode();
+        project.add(loadedProject);
+
+        MapNodeComposite projectNode = (MapNodeComposite) project.getMapNode();
+        projectNode.addChild(node);
+        node.setParent(project.getMapNode());
+        node.addSubscriber(MainFrame.getInstance().getProjectView().getMapView());
+
+        MainFrame.getInstance().getProjectView().refreshWorkspace(project.getMapNode());
+
+        for(MapNode childNodic: node.getListOfChildren()){
+
+            if(childNodic instanceof Title)
+                ((Title) childNodic).setLinks(new ArrayList<>());
+        }
+
+        for(MapNode nodic: node.getListOfChildren()){
+
+            nodic.setParent(node);
+            nodic.addSubscriber(MainFrame.getInstance().getProjectView().getMapView());
+            MapTreeItem reborNodic = new MapTreeItem(nodic);
+            loadedProject.add(reborNodic);
+
+             if(nodic instanceof Link){
+                 ElementPainter fromElement = MainFrame.getInstance().getProjectView().getMapView().elementPainter(((Link) nodic).getFromPoint());
+                 Title from = (Title) fromElement.getElement();
+                 from.addLink((Link) nodic);
+                 ElementPainter toElement = MainFrame.getInstance().getProjectView().getMapView().elementPainter(((Link) nodic).getToPoint());
+                 Title to = (Title) toElement.getElement();
+                 to.addLink((Link) nodic);
+
+
+                 ((Link) nodic).setFrom(from);
+                 ((Link) nodic).setTo(to);
+
+
+                }
+
+            }
+
+
 
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);

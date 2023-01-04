@@ -45,6 +45,10 @@ public class ActionMenager {
 
     private OpenAction openAction;
 
+    private OpenTemplateAction openTemplateAction;
+
+    private SaveTemplate saveTemplate;
+
 
     public ActionMenager(){
         initialiseActions();
@@ -69,6 +73,8 @@ public class ActionMenager {
         saveAsPictureAction = new SaveAsPictureAction();
         saveAction = new SaveAction();
         openAction = new OpenAction();
+        openTemplateAction = new OpenTemplateAction();
+        saveTemplate = new SaveTemplate();
     }
 
 
