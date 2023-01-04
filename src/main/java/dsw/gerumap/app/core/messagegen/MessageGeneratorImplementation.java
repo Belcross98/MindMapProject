@@ -41,10 +41,10 @@ public class MessageGeneratorImplementation implements MessageGenerator, IPublis
             msg = new Message("You dont have start point!", MessageType.WARNING, LocalDateTime.now());
         }
        else if(type == EventType.YOU_HAVE_TO_SELECT_PROJECT){
-           msg = new Message("You have to select project first in order to save!",MessageType.WARNING,LocalDateTime.now());
+           msg = new Message("You have to select project first!",MessageType.WARNING,LocalDateTime.now());
         }
        else if(type == EventType.YOU_HAVE_TO_SELECT_MINDMAP) {
-            msg = new Message("You have to select Mind Map first in order to add Elements!", MessageType.WARNING, LocalDateTime.now());
+            msg = new Message("You have to select Mind Map first!", MessageType.WARNING, LocalDateTime.now());
         }
         notifySubscribers(msg);
         return msg;
