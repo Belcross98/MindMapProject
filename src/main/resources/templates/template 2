@@ -1,0 +1,383 @@
+{
+  "filePath": "C:\\Users\\Belcross\\Documents\\template 2",
+  "listOfChildren": [
+    {
+      "type": "Title",
+      "properties": {
+        "size": {
+          "width": 120,
+          "height": 60
+        },
+        "position": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 249,
+            "y": 126
+          }
+        },
+        "shape": {
+          "type": "Float",
+          "properties": {
+            "x": 249.0,
+            "y": 126.0,
+            "width": 120.0,
+            "height": 60.0
+          }
+        },
+        "width": 5,
+        "color": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "currentColor": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "description": "Title",
+        "selected": false,
+        "name": "Title",
+        "changed": true
+      }
+    },
+    {
+      "type": "Title",
+      "properties": {
+        "size": {
+          "width": 120,
+          "height": 60
+        },
+        "position": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 488,
+            "y": 87
+          }
+        },
+        "shape": {
+          "type": "Float",
+          "properties": {
+            "x": 488.0,
+            "y": 87.0,
+            "width": 120.0,
+            "height": 60.0
+          }
+        },
+        "width": 5,
+        "color": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "currentColor": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 255,
+            "a": 255
+          }
+        },
+        "description": "Title",
+        "selected": true,
+        "name": "Title",
+        "changed": true
+      }
+    },
+    {
+      "type": "Link",
+      "properties": {
+        "fromPoint": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 309,
+            "y": 156
+          }
+        },
+        "toPoint": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 548,
+            "y": 117
+          }
+        },
+        "shape": {
+          "type": "GeneralPath",
+          "properties": {}
+        },
+        "width": 5,
+        "color": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "currentColor": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "description": "description",
+        "selected": false,
+        "name": "link",
+        "changed": false
+      }
+    },
+    {
+      "type": "Title",
+      "properties": {
+        "size": {
+          "width": 120,
+          "height": 60
+        },
+        "position": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 798,
+            "y": 205
+          }
+        },
+        "shape": {
+          "type": "Float",
+          "properties": {
+            "x": 798.0,
+            "y": 205.0,
+            "width": 120.0,
+            "height": 60.0
+          }
+        },
+        "width": 5,
+        "color": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "currentColor": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "description": "Title",
+        "selected": false,
+        "name": "Title",
+        "changed": true
+      }
+    },
+    {
+      "type": "Title",
+      "properties": {
+        "size": {
+          "width": 120,
+          "height": 60
+        },
+        "position": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 395,
+            "y": 357
+          }
+        },
+        "shape": {
+          "type": "Float",
+          "properties": {
+            "x": 395.0,
+            "y": 357.0,
+            "width": 120.0,
+            "height": 60.0
+          }
+        },
+        "width": 5,
+        "color": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "currentColor": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "description": "Title",
+        "selected": false,
+        "name": "Title",
+        "changed": true
+      }
+    },
+    {
+      "type": "Link",
+      "properties": {
+        "fromPoint": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 548,
+            "y": 117
+          }
+        },
+        "toPoint": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 858,
+            "y": 235
+          }
+        },
+        "shape": {
+          "type": "GeneralPath",
+          "properties": {}
+        },
+        "width": 5,
+        "color": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "currentColor": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "description": "description",
+        "selected": false,
+        "name": "link",
+        "changed": false
+      }
+    },
+    {
+      "type": "Link",
+      "properties": {
+        "fromPoint": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 858,
+            "y": 235
+          }
+        },
+        "toPoint": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 455,
+            "y": 387
+          }
+        },
+        "shape": {
+          "type": "GeneralPath",
+          "properties": {}
+        },
+        "width": 5,
+        "color": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "currentColor": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "description": "description",
+        "selected": false,
+        "name": "link",
+        "changed": false
+      }
+    },
+    {
+      "type": "Link",
+      "properties": {
+        "fromPoint": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 455,
+            "y": 387
+          }
+        },
+        "toPoint": {
+          "type": "SerializablePoint2D",
+          "properties": {
+            "x": 309,
+            "y": 156
+          }
+        },
+        "shape": {
+          "type": "GeneralPath",
+          "properties": {}
+        },
+        "width": 5,
+        "color": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "currentColor": {
+          "type": "SerializableColor",
+          "properties": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        "description": "description",
+        "selected": false,
+        "name": "link",
+        "changed": false
+      }
+    }
+  ],
+  "name": "MindMap 1",
+  "changed": true
+}

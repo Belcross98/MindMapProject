@@ -32,7 +32,7 @@ public class OpenTemplateAction extends AbstractGerumapAction{
         }
 
         {
-            JFileChooser jfc = new JFileChooser();
+            JFileChooser jfc = new JFileChooser("src/main/resources/templates");
 
             if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
                 try {
